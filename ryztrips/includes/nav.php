@@ -12,10 +12,9 @@
 	          <li class="nav-item"><a href="index.php#nos_trajet" class="nav-link">Nos trajet</a></li>
 	          <li class="nav-item"><a href="car.html" class="nav-link">proposer trajet</a></li>
 	          <li class="nav-item"><a href="contact.php" class="nav-link">Contactez-nous</a></li>	  
-	        </ul>
-			
-			<form action="login.php" method="post">
-             <input type="submit" value="Login" class="form-control btn btn-primary">
+			  <li class="nav-item"><a href="register.php" class="nav-link ">Créer un compte</a></li>
+	          <li class="nav-item"><a href="login.php" class="nav-link btn btn-primary">Connexion</a></li>	
+			</ul> 
             </form>
 	      </div>
 	    </div>
