@@ -22,25 +22,38 @@
         <div class="form-content">
           <div class="login-form">
             <div class="title">Login</div>
-          <form action="#">
+            <?php
+            if (isset($_GET['error']) && $_GET['error'] == 1) {
+                echo '<p style="color: red;">Adresse e-mail ou mot de passe incorrect</p>';
+            }
+          ?>
+          <form action="verify_login.php" method="post">
             <div class="input-boxes">
-                <div class="input-box">
-                    <i class="fas fa-envelope"></i>
-                    <input type="text" placeholder="Adresse e-mail" required>
-                </div>
-                <div class="input-box">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Mot de passe" required>
-                </div>
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input type="text" name="email" placeholder="Adresse e-mail" required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Mot de passe" required>
+              </div>
+              <div class="input-box">
+              <label>
+                  <input type="radio" name="role" value="client" checked> 
+                  <span>Client</span>
+              </label>
+              <label>
+                  <input type="radio" name="role" value="conducteur"> 
+                  <span>Conducteur</span>
+              </label>
+              </div>
               <div class="text"><a href="#">Forgot password?</a></div>
               <div class="button input-box">
-                <input type="submit" value="Sumbit">
+                <input type="submit" value="Submit">
               </div>
-              <div class="text sign-up-text">Vous n'avez pas de compte ? <label for="flip" onclick="redirigerVersInscription()"> Connectez-vous</label></div>
-
-              
+              <div class="text sign-up-text">Vous n'avez pas de compte ? <a href="register.php"> Connectez-vous</a></div>
             </div>
-        </form>
+          </form>
       </div>
       
     </div>
@@ -49,7 +62,7 @@
 </body>
 <script>
     function redirigerVersInscription() {
-        window.location.href = 'register.html';
+        window.location.href = 'register.php';
     }
 </script>
 </html>
