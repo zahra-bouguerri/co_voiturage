@@ -25,6 +25,14 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+	<style>
+		
+		input[type="submit"] {
+		  width: 100px; /* Largeur en pixels */
+		  height: 30px; /* Hauteur en pixels */
+		 
+		}
+	  </style>
   </head>
   <body>
     
@@ -37,36 +45,44 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto mr-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="pricing.html" class="nav-link">Our Trip</a></li>
-	          <li class="nav-item"><a href="car.html" class="nav-link">Demand</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>	  
+	          <li class="nav-item active"><a href="index.html" class="nav-link">Acceuil</a></li>
+	          <li class="nav-item"><a href="about.html" class="nav-link">A propos</a></li>
+	          <li class="nav-item"><a href="pricing.html" class="nav-link">Nos trajet</a></li>
+	          <li class="nav-item"><a href="car.html" class="nav-link">proposer trajet</a></li>
+	          <li class="nav-item"><a href="contact.html" class="nav-link">Contactez-nous</a></li>	  
 	        </ul>
-			<input type="submit" value="Login" class="login">
+			
+			<input type="submit" value="Login" class="form-control btn btn-primary">
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
     
     <div class="hero-wrap" style="background-image: url('images/jaja2.png');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text justify-content-start align-items-center">
-          <div class="col-lg-6 col-md-6 ftco-animate d-flex align-items-end">
-          	<div class="text">
-	            <h1 class="mb-4">No matter  <span>How far</span> <span>You'll be on time.</span></h1>
-	            <p style="font-size: 18px;">Embark on wtimely arrivals tailored to yourrusrney remarkable, your way.</p>
-	            <a href="https://vimeo.com/45830194" class="icon-wrap popup-vimeo d-flex align-items-center mt-4">
-	            	<div class="icon d-flex align-items-center justify-content-center">
-	            		<span class="ion-ios-play"></span>
-	            	</div>
-	            	<div class="heading-title ml-5">
-		            	<span>Easy steps for make a trip</span>
-	            	</div>
-	            </a>
-            </div>
-          </div>
+		<div class="overlay"></div>
+		<div class="container">
+		  <div class="row no-gutters slider-text justify-content-start align-items-center">
+			<div class="col-lg-6 col-md-6 ftco-animate d-flex align-items-end">
+				<div class="text">
+				  <h1 class="mb-4">Voyagez et  <span> Réservez avec Simplicité </span></h1>
+				  <p style="font-size: 18px;"> Avec notre service de réservation en ligne, </br> découvrez le confort d'un voyage sans souci,</br> où chaque détail est pris en charge pour</br> vous. </p>
+				  <a  class="icon-wrap popup-vimeo d-flex align-items-center mt-4">
+					  <div class="icon d-flex align-items-center justify-content-center">
+						  
+					  </div>
+					  <div class="heading-title ml-5">
+						  <span>étape pour réserver  trajet</span>
+					  </div>
+				  </a>
+			  </div>
+			</div>
+			<div class="col-lg-2 col"></div>
+			<div class="col-lg-4 col-md-6 mt-0 mt-md-5 d-flex">
+				
+			</div>
+		  </div>
+		</div>
+	  </div>
           <div class="col-lg-2 col"></div>
           <div class="col-lg-4 col-md-6 mt-0 mt-md-5 d-flex">
           	<!--<form action="#" class="request-form ftco-animate">
@@ -107,14 +123,14 @@
 	    	<div class="row">
 					<div class="col-md-12">
 						<div class="row justify-content-center heading-section text-center ">
-							<h2 class="mb-2" style="margin-top: 30px;">Make your trip</h2>
+							<h2 class="mb-2" style="margin-top: 30px;">Rechercher un trajet</h2>
 						</div>
 						<div class="search-wrap-1 ftco-animate mb-5">
 							<form action="#" class="search-property-1">
 		        		<div class="row">
 		        			<div class="col-lg align-items-end">
 		        				<div class="form-group">
-		        					<label for="#">Pick-up location</label>
+		        					<label for="#">endroit de départ</label>
 		        					<div class="form-field">
 		          					<div class="select-wrap">
 							  <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
@@ -124,7 +140,7 @@
 		        			</div>
 		        			<div class="col-lg align-items-end">
 		        				<div class="form-group">
-		        					<label for="#">Drop-off location</label>
+		        					<label for="#">endroit d'arrivée</label>
 		        					<div class="form-field">
 		          					<div class="select-wrap">
 										<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
@@ -134,7 +150,7 @@
 		        			</div>
 		        			<div class="col-lg align-items-end">
 		        				<div class="form-group">
-		        					<label for="#">Pick-up date</label>
+		        					<label for="#">date de départ </label>
 		        					<div class="form-field">
 		          					<div class="select-wrap">
 										<input type="date" class="form-control" id="book_pick_date">
@@ -144,7 +160,7 @@
 		        			</div>
 		        			<div class="col-lg align-items-end">
 		        				<div class="form-group">
-		        					<label for="#">Pick-up time</label>
+		        					<label for="#">heure de départ</label>
 		        					<div class="form-field">
 		          					<div class="select-wrap">
 										<input type="time" class="form-control" id="book_pick_time">
@@ -156,7 +172,8 @@
 		        			<div class="col-lg align-self-end">
 		        				<div class="form-group">
 		        					<div class="form-field">
-				                <input type="submit" value="Search" class="form-control btn btn-primary">
+										<input type="button" value="Recherche" class="form-control btn btn-primary" onclick="redirectToSearchPage()">
+								
 				              </div>
 			              </div>
 		        			</div>
@@ -169,69 +186,69 @@
     </section>
 
     <section class="ftco-section services-section ftco-no-pt ftco-no-pb">
-      <div class="container">
-      	<div class="row justify-content-center">
-          <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-          	<span class="subheading">Our Services</span>
-            <h2 class="mb-2">Our Services</h2>
-          </div>
-        </div>
-        <div class="row d-flex">
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services">
-              <div class="media-body py-md-4">
-              	<div class="d-flex mb-3 align-items-center">
-	              	<div class="icon"><span class="flaticon-customer-support"></span></div>
-	                <h3 class="heading mb-0 pl-3">24/7 Car Support</h3>
-                </div>
-                <p>njoy 24/7 car reservations, ensuring seamless journeys tailored just for you.</p>
-              </div>
-            </div>      
-          </div>
-         
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services">
-              <div class="media-body py-md-4">
-              	<div class="d-flex mb-3 align-items-center">
-	              	<div class="icon"><span class="flaticon-online-booking"></span></div>
-	                <h3 class="heading mb-0 pl-3">Reservation</h3>
-                </div>
-                <p>Effortless car reservations, your way. Choose chauffeur or self-drive for a personalized journey.</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services">
-              <div class="media-body py-md-4">
-              	<div class="d-flex mb-3 align-items-center">
-	              	<div class="icon"><span class="flaticon-rent"></span></div>
-	                <h3 class="heading mb-0 pl-3">Empower Drive</h3>
-                </div>
-                <p>offer your car or services as a driver, turning your journey into an opportunity</p>
-              </div>
-            </div>      
-          </div>
-		  <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services">
-              <div class="media-body py-md-4">
-              	<div class="d-flex mb-3 align-items-center">
-	              	<div class="icon"><span class="flaticon-route"></span></div>
-	                <h3 class="heading mb-0 pl-3">Custom Rides</h3>
-                </div>
-                <p> On-demand rides, tailored to you. Your choice, personalized journey awaits.</p>
-              </div>
-            </div>      
-          </div>
-        </div>
-      </div>
-    </section>
+		<div class="container">
+			<div class="row justify-content-center">
+			<div class="col-md-12 heading-section text-center ftco-animate mb-5">
+				<span class="subheading">Nos Services</span>
+			  <h2 class="mb-2">Nos Services</h2>
+			</div>
+		  </div>
+		  <div class="row d-flex">
+			<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+			  <div class="media block-6 services">
+				<div class="media-body py-md-4">
+					<div class="d-flex mb-3 align-items-center">
+						<div class="icon"><span class="flaticon-customer-support"></span></div>
+					  <h3 class="heading mb-0 pl-3">24/7 Assistance Automobile</h3>
+				  </div>
+				  <p>Assistance disponible à toute heure pour répondre aux besoins des conducteurs.</p>
+				</div>
+			  </div>      
+			</div>
+			<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+			  <div class="media block-6 services">
+				<div class="media-body py-md-4">
+					<div class="d-flex mb-3 align-items-center">
+						<div class="icon"><span class="flaticon-route"></span></div>
+					  <h3 class="heading mb-0 pl-3">Nombreux emplacements</h3>
+				  </div>
+				  <p>Une multitude d'emplacements à travers lesquels notre service s'étend pour une accessibilité optimale.</p>
+				</div>
+			  </div>      
+			</div>
+			<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+			  <div class="media block-6 services">
+				<div class="media-body py-md-4">
+					<div class="d-flex mb-3 align-items-center">
+						<div class="icon"><span class="flaticon-online-booking"></span></div>
+					  <h3 class="heading mb-0 pl-3">Réservation</h3>
+				  </div>
+				  <p>Un processus simple et efficace pour réserver votre trajet en quelques étapes.</p>
+				</div>
+			  </div>      
+			</div>
+			<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+			  <div class="media block-6 services">
+				<div class="media-body py-md-4">
+					<div class="d-flex mb-3 align-items-center">
+						<div class="icon"><span class="flaticon-rent"></span></div>
+					  <h3 class="heading mb-0 pl-3">Location de voitures</h3>
+				  </div>
+				  <p>Offre de véhicules disponibles à la location pour répondre à vos besoins de déplacement.</p>
+				</div>
+			  </div>      
+			</div>
+		  </div>
+		</div>
+	  </section>
+  
 
     <section class="ftco-section">
     	<div class="container-fluid px-4">
     		<div class="row justify-content-center">
           <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-          	<span class="subheading">What we offer</span>
-            <h2 class="mb-2">Choose Your Road</h2>
+          	<span class="subheading">Ce que nous offrons</span>
+            <h2 class="mb-2">choisissez votre trajet</h2>
           </div>
         </div>
     		<div class="row">
@@ -239,17 +256,18 @@
     				<div class="car-wrap ftco-animate">
     					<div class="img d-flex align-items-end" style="background-image: url(images/car-1.jpg);">
     						<div class="price-wrap d-flex">
-    							<span class="rate">$25</span>
-    							<p class="from-day">
-    								<span>From</span>
-    								<span>/Day</span>
-    							</p>
+    							<span class="rate">1500 DA</span>
+    						
     						</div>
     					</div>
+						
     					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-    						<span>Audi</span>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Book now</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
+    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
+						</br>
+    						<span>conducteur : Hamza</span>
+							<span>voiture : Audi</span>
+							<span>place disponible : 5</span>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
     					</div>
     				</div>
     			</div>
@@ -264,10 +282,14 @@
     							</p>
     						</div>
     					</div>
+    					
     					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-    						<span>Ford</span>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Book now</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
+    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
+						</br>
+    						<span>conducteur : Hamza</span>
+							<span>voiture : Audi</span>
+							<span>place disponible : 5</span>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
     					</div>
     				</div>
     			</div>
@@ -282,10 +304,14 @@
     							</p>
     						</div>
     					</div>
+    					
     					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-    						<span>Cheverolet</span>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Book now</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
+    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
+						</br>
+    						<span>conducteur : Hamza</span>
+							<span>voiture : Audi</span>
+							<span>place disponible : 5</span>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
     					</div>
     				</div>
     			</div>
@@ -300,10 +326,14 @@
     							</p>
     						</div>
     					</div>
+    					
     					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-    						<span>Mercedes</span>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Book now</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
+    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
+						</br>
+    						<span>conducteur : Hamza</span>
+							<span>voiture : Audi</span>
+							<span>place disponible : 5</span>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
     					</div>
     				</div>
     			</div>
@@ -319,10 +349,14 @@
     							</p>
     						</div>
     					</div>
+    					
     					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-    						<span>Audi</span>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Book now</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
+    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
+						</br>
+    						<span>conducteur : Hamza</span>
+							<span>voiture : Audi</span>
+							<span>place disponible : 5</span>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
     					</div>
     				</div>
     			</div>
@@ -337,10 +371,14 @@
     							</p>
     						</div>
     					</div>
+    					
     					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-    						<span>Ford</span>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Book now</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
+    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
+						</br>
+    						<span>conducteur : Hamza</span>
+							<span>voiture : Audi</span>
+							<span>place disponible : 5</span>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
     					</div>
     				</div>
     			</div>
@@ -355,10 +393,14 @@
     							</p>
     						</div>
     					</div>
+    					
     					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-    						<span>Cheverolet</span>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Book now</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
+    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
+						</br>
+    						<span>conducteur : Hamza</span>
+							<span>voiture : Audi</span>
+							<span>place disponible : 5</span>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
     					</div>
     				</div>
     			</div>
@@ -373,14 +415,17 @@
     							</p>
     						</div>
     					</div>
+    					
     					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-    						<span>Mercedes</span>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Book now</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
+    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
+						</br>
+    						<span>conducteur : Hamza</span>
+							<span>voiture : Audi</span>
+							<span>place disponible : 5</span>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> <a href="#" class="btn btn-black btn-outline-black ml-1">Details</a></p>
     					</div>
     				</div>
     			</div>
-    		</div>
 			<div class="row mt-5">
 				<div class="col text-center">
 				  <div class="block-27">
@@ -627,6 +672,10 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
+  <script>
+    function redirectToSearchPage() {
+        window.location.href = "pricing.html";
+    }
+</script>
   </body>
 </html>
