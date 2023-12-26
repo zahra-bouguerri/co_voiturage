@@ -211,3 +211,15 @@ body{
     display: none;
   }
 }
+.flex {
+  display: flex;
+  
+}
+
+.input-box {
+  margin-right: 10px; /* Adjust the margin to control the space between the input boxes */
+}
+
+.space {
+  width: 10px; /* Adjust the width to control the space between the input boxes */
+}
