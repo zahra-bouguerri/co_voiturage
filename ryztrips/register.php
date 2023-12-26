@@ -24,32 +24,32 @@
         <div class="form-content">
           <div class="login-form">
             <div class="title">Connexion Cliente</div>
-            <form action="#">
+            <form action="register_process.php" method="post">
                 <div class="input-boxes">
                  <div class="flex">
                     <div class="input-box">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Nom" required>
+                        <input type="text" name="nom" placeholder="Nom" required>
                     </div>
                     <div class="input-box">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Prenom" required>
+                        <input type="text"  name="prenom" placeholder="Prenom" required>
                     </div>
                 </div>
                     <div class="input-box">
                         <i class="fas fa-phone"></i>
-                        <input type="tel" placeholder="Numero telephone" required>
+                        <input type="tel" name="telephone" placeholder="Numero telephone" required>
                     </div>
                     <div class="input-box">
                         <i class="fas fa-envelope"></i>
-                        <input type="text" placeholder="Adresse e-mail" required>
+                        <input type="text" name="email" placeholder="Adresse e-mail" required>
                     </div>
                     <div class="input-box">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Mot de passe" required>
+                        <input type="password" name="password" placeholder="Mot de passe" required>
                     </div>
                     <div class="button input-box">
-                        <input type="submit" value="Envoyer">
+                        <input type="submit" name="conducteur_submit" value="Envoyer">
                     </div>
                     <div class="text sign-up-text"> <label for="flip">Connectez-vous en tantque condicteur</label></div>
                     <div class="text sign-up-text">Vous avez déjà un compte ? <label for="flip" onclick="redirigerVersConnexion()">Connectez-vous </label></div>
@@ -58,53 +58,46 @@
       </div>
         <div class="signup-form">
             <div class="title">Connexion Condecteur</div>
-            <form action="#">
-                <div class="flex">
-                    <div class="input-box">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Nom" required>
+            <form action="register_process.php" method="post">
+                    <div class="flex">
+                        <div class="input-box">
+                            <i class="fas fa-user"></i>
+                            <input type="text" name="nom" placeholder="Nom" required>
+                        </div>
+                        <div class="input-box">
+                            <i class="fas fa-user"></i>
+                            <input type="text" name="prenom" placeholder="Prenom" required>
+                        </div>
                     </div>
-                    <div class="input-box">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Prenom" required>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div class="input-box">
-                        <i class="fas fa-car"></i>
-                        <input type="text" placeholder="Matricule" required>
-                    </div>
-                    <div class="input-box">
-                        <i class="fas fa-car"></i>
-                        <input type="text" placeholder="Nom Voiture" required>
-                    </div>
+                    <div class="flex">
+                        <div class="input-box">
+                            <i class="fas fa-car"></i>
+                            <input type="text" name="matricule" placeholder="Matricule" required>
+                        </div>
+                        <div class="input-box">
+                            <i class="fas fa-car"></i>
+                            <input type="text" name="nom_voiture" placeholder="Nom Voiture" required>
+                        </div>
                     </div>
                     <div class="input-box">
                         <i class="fas fa-phone"></i>
-                        <input type="tel" placeholder="Numero telephone" required>
+                        <input type="tel" name="telephone" placeholder="Numero telephone" required>
                     </div>
                     <div class="input-box">
                         <i class="fas fa-envelope"></i>
-                        <input type="text" placeholder="Adresse e-mail" required>
+                        <input type="text" name="email" placeholder="Adresse e-mail" required>
                     </div>
                     <div class="input-box">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Mot de passe" required>
+                        <input type="password" name="password" placeholder="Mot de passe" required>
                     </div>
-              
-                    </form>
-                    </form>
+            
                     <div class="button input-box">
-                        <input type="submit" value="Envoyer">
+                        <input type="submit" name="conducteur_submit" value="Envoyer">
                     </div>
                     <div class="text sign-up-text"> <label for="flip">Connectez-vous en tantque client</label></div>
                     <div class="text sign-up-text">Vous avez déjà un compte ? <label for="flip" onclick="redirigerVersConnexion()">Connectez-vous </label></div>
 
-                    <script>
-                        function redirigerVersConnexion() {
-                            window.location.href = 'login.html';
-                        }
-                    </script>
                 </div>
       </form>
     </div>
