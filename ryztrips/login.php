@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/c/CodingLabYT-->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
@@ -13,68 +14,42 @@
     <input type="checkbox" id="flip">
     <div class="cover">
       <div class="front">
-        <img src="./images/login.jpeg" alt="">
-        <div class="text">
-          <span class="text-1">Chaque nouveau trajet est une <br> nouvelle expérience</span>
-          <span class="text-2">"Connectez-vous."</span>
-        </div>
+        <img src="images/frontImg.jpeg" alt="">
+    
       </div>
     </div>
     <div class="forms">
         <div class="form-content">
           <div class="login-form">
-            <div class="title">Connexion</div>
+            <div class="title">Login</div>
           <form action="#">
             <div class="input-boxes">
-              <div class="input-box">
-                <i class="fas fa-envelope"></i>
-                <input type="text " placeholder="Entre votre email" required>
-              </div>
-              <div class="input-box">
-                <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Enter votre mot de pass" required>
-              </div>
-              <div class="text"><a href="#">Mot de passe oublié ?</a></div>
+                <div class="input-box">
+                    <i class="fas fa-envelope"></i>
+                    <input type="text" placeholder="Adresse e-mail" required>
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Mot de passe" required>
+                </div>
+              <div class="text"><a href="#">Forgot password?</a></div>
               <div class="button input-box">
-                <input type="submit" value="Envoyer">
+                <input type="submit" value="Sumbit">
               </div>
-              <div class="text sign-up-text">Vous n'avez pas de compte ? <label for="flip">Inscrivez-vous maintenant</label></div>
+              <div class="text sign-up-text">Vous n'avez pas de compte ? <label for="flip" onclick="redirigerVersInscription()"> Connectez-vous</label></div>
+
+              
             </div>
         </form>
       </div>
-        <div class="signup-form">
-            <div class="title">Inscription</div>
-            <form action="#">
-                <div class="input-boxes">
-                    <div class="input-box">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Entrez votre nom" required>
-                    </div>
-                    <div class="input-box">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Entrez votre prenom" required>
-                    </div>
-                    <div class="input-box">
-                        <i class="fas fa-user"></i>
-                        <input type="tel" placeholder="Entrez numero telephone" required>
-                    </div>
-                    <div class="input-box">
-                        <i class="fas fa-envelope"></i>
-                        <input type="text" placeholder="Entrez votre adresse e-mail" required>
-                    </div>
-                    <div class="input-box">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Entrez votre mot de passe" required>
-                    </div>
-                    <div class="button input-box">
-                        <input type="submit" value="Envoyer">
-                    </div>
-                    <div class="text sign-up-text">Vous avez déjà un compte ? <label for="flip">Connectez-vous maintenant</label></div>
-            </div>
-      </form>
-    </div>
+      
     </div>
     </div>
   </div>
 </body>
+<script>
+    function redirigerVersInscription() {
+        window.location.href = 'register.html';
+    }
+</script>
 </html>
