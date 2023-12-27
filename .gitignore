@@ -1,0 +1,5 @@
+# Ignorer les fichiers générés
+.DS_Store
+
+# Ignorer les fichiers de sauvegarde
+*.save
