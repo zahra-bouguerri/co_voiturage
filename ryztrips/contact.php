@@ -34,18 +34,18 @@
         <div class="row block-9 justify-content-center mb-5">
           <div class="col-md-8 mb-md-5">
           <h2 class="text-center">Si vous avez des questions <br> n'hésitez pas à nous envoyer un message</h2>
-            <form action="#" class="bg-light p-5 contact-form justify-content-center">
+            <form action="contacter.php" method="post" class="bg-light p-5 contact-form justify-content-center">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Votre Nom">
+                <input type="text" name="nom" class="form-control" placeholder="Votre Nom">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Votre Email">
+                <input type="text" name="email"class="form-control" placeholder="Votre Email">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Sujet">
+                <input type="text" name="subject" class="form-control" placeholder="Sujet">
               </div>
               <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                <textarea name="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
               </div>
               <div class="form-group text-center">
               <input type="submit" value="Envoyer" class="form-control btn btn-primary">

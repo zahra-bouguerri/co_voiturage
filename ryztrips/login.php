@@ -1,3 +1,60 @@
+<?php
+include('../config/connect.php');
+session_start();
+
+if (isset($_POST['submit'])) {
+    // Logique de connexion
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+
+    // Choix de la table appropriée en fonction du rôle de l'utilisateur
+    $table = ($role == 'client') ? 'client' : 'conducteur';
+    $emailField = ($role == 'client') ? 'adresse_client' : 'adresse_conducteur';
+    $passwordField = ($role == 'client') ? 'mdp_client' : 'mdp_conducteur';
+
+    $sql = "SELECT * FROM $table WHERE $emailField=? AND is_verified=1";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+
+        if (password_verify($password, $row[$passwordField])) {
+            // Connexion réussie
+            $_SESSION['loggedIn'] = true;
+            $_SESSION['role'] = $role;
+            $_SESSION['userId'] = $row['id'];
+
+            // Définir un cookie pour une connexion persistante si "Se souvenir de moi" est coché
+            if (isset($_POST['remember_me']) && $_POST['remember_me'] == 1) {
+                $cookie_name = 'remember_me_cookie';
+                $cookie_value = $_SESSION['userId'];
+                setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // Le cookie expire en 30 jours
+            }
+
+            $success = 'Connexion réussie !';
+            header("Location: index.php");
+            exit();
+
+        } 
+        else {
+          $email_error = "L'adresse e-mail que vous avez saisie n'existe pas.";
+          header("Location: your_login_page.php?error=1");
+          exit();
+        }
+    } else {
+        $email_error = "L'adresse e-mail que vous avez saisie n'existe pas.";
+        header("Location: login.php?error=1");
+        exit();
+
+          }
+}
+?>
+
+
 <!DOCTYPE html>
 <!-- Created by CodingLab |www.youtube.com/c/CodingLabYT-->
 <html lang="en" dir="ltr">
@@ -22,25 +79,40 @@
         <div class="form-content">
           <div class="login-form">
             <div class="title">Login</div>
-          <form action="#">
+           
+          <form  method="post">
             <div class="input-boxes">
-                <div class="input-box">
-                    <i class="fas fa-envelope"></i>
-                    <input type="text" placeholder="Adresse e-mail" required>
-                </div>
-                <div class="input-box">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Mot de passe" required>
-                </div>
-              <div class="text"><a href="#">Forgot password?</a></div>
-              <div class="button input-box">
-                <input type="submit" value="Sumbit">
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input type="text" name="email" placeholder="Adresse e-mail" required>
               </div>
-              <div class="text sign-up-text">Vous n'avez pas de compte ? <label for="flip" onclick="redirigerVersInscription()"> Connectez-vous</label></div>
-
-              
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Mot de passe" required>
+              </div>
+              <div class="input-box">
+                
+              <label>
+                  <input type="radio" name="role" value="client" checked> 
+                  <span>Client</span>
+              </label>
+              <label>
+                  <input type="radio" name="role" value="conducteur"> 
+                  <span>Conducteur</span>
+              </label>
+              </div>
+             
+              <?php
+            if (isset($_GET['error']) && $_GET['error'] == 1) {
+                echo '<p style="color: red;">Adresse e-mail ou mot de passe incorrect</p>';
+            }
+          ?>
+              <div class="button input-box">
+                <input type="submit" name="submit" value="Submit">
+              </div>
+              <div class="text sign-up-text">Vous n'avez pas de compte ? <a href="register.php"> Connectez-vous</a></div>
             </div>
-        </form>
+          </form>
       </div>
       
     </div>
@@ -49,7 +121,7 @@
 </body>
 <script>
     function redirigerVersInscription() {
-        window.location.href = 'register.html';
+        window.location.href = 'register.php';
     }
 </script>
 </html>
