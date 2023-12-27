@@ -28,12 +28,12 @@
 </br></br>
           
 </br>
-            <h2 class="mb-3">Conducteur</h2>
-            <span class="subheading">gerer vos trajets facilement et gagner beaucoup de clients</span>
+            <h2 class="mb-3">Proposer vos trajets</h2>
+            <span class="subheading">Aidez-nous à ameliorer notre application en proposant vos trajets souhaités</span>
     </br>
     </br>
 
-            <h1 class="subheading">Liste de mes trajets</h1>
+           
           </div>
         </div>	
     	</div>
