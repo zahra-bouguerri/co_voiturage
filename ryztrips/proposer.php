@@ -1,4 +1,35 @@
 <?php include "./includes/header.php"?>  
+<?php
+// Informations de connexion à la base de données
+$host = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$dbname = "covoiturage"; 
+
+// Tentative de connexion à la base de données
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Vérification de la connexion
+if ($conn->connect_error) {
+    die("La connexion à la base de données a échoué : " . $conn->connect_error);
+}
+
+// Traitement du formulaire
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $lieu_depart = $_POST["lieu_depart"];
+    $lieu_arrivee = $_POST["lieu_arrivee"];
+
+    // Insérer les données dans la base de données - À personnaliser selon votre structure de base de données
+    $requete = "INSERT INTO trajet_propose (depart, arrivee) VALUES ('$lieu_depart', '$lieu_arrivee')";
+
+    if ($conn->query($requete) === TRUE) {
+        echo "Trajet proposé avec succès.";
+    } else {
+        echo "Erreur lors de la proposition du trajet : " . $conn->error;
+    }
+}
+
+?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
         .form-container {
@@ -44,31 +75,26 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-container">
-                <!-- Contenu du premier formulaire -->
+                <!-- Contenu du formulaire -->
                 <section class="ftco-section ftco-no-pb ftco-no-pt">
-                    <form action="#" class="request-form ftco-animate">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="request-form ftco-animate">
                         <h2>Proposer un trajet</h2>
                         <div class="form-group">
-                            <label for="" class="label">Lieu de départ</label>
-                            <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                            <label for="lieu_depart" class="label">Lieu de départ</label>
+                            <input type="text" name="lieu_depart" id="lieu_depart" class="form-control" placeholder="City, Airport, Station, etc" required>
                         </div>
                         <div class="form-group">
-                            <label for="" class="label">Lieu d'arivée</label>
-                            <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+                            <label for="lieu_arrivee" class="label">Lieu d'arrivée</label>
+                            <input type="text" name="lieu_arrivee" id="lieu_arrivee" class="form-control" placeholder="City, Airport, Station, etc" required>
                         </div>	
-                        <!-- Autres champs du formulaire... -->
                         <div class="form-group">
-                        <input type="button" value="Envoyer" class="form-control btn btn-primary" onclick="redirectToSearchPage()">
+                            <input type="submit" value="Envoyer" class="form-control btn btn-primary">
                         </div>
                     </form>
                 </section>
             </div>
         </div>
-       
-            </div>
-        </div>
     </div>
-</div>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
