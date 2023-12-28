@@ -6,6 +6,7 @@ $username = "root";
 $password = ""; 
 $dbname = "covoiturage"; 
 
+session_start();
 // Tentative de connexion à la base de données
 $conn = new mysqli($host, $username, $password, $dbname);
 

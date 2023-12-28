@@ -12,6 +12,7 @@ if (isset($_POST['submit'])) {
     $table = ($role == 'client') ? 'client' : 'conducteur';
     $emailField = ($role == 'client') ? 'adresse_client' : 'adresse_conducteur';
     $passwordField = ($role == 'client') ? 'mdp_client' : 'mdp_conducteur';
+    $idField = ($role == 'client') ? 'id_client' : 'id_conducteur';
 
     $sql = "SELECT * FROM $table WHERE $emailField=? AND is_verified=1";
     $stmt = $conn->prepare($sql);
@@ -23,10 +24,10 @@ if (isset($_POST['submit'])) {
         $row = $result->fetch_assoc();
 
         if (password_verify($password, $row[$passwordField])) {
-            // Connexion réussie
-            $_SESSION['loggedIn'] = true;
-            $_SESSION['role'] = $role;
-            $_SESSION['userId'] = $row['id'];
+        // Connexion réussie
+        $_SESSION['loggedIn'] = true;
+        $_SESSION['role'] = $role;
+        $_SESSION['userId'] = $row[$idField];
 
             // Définir un cookie pour une connexion persistante si "Se souvenir de moi" est coché
             if (isset($_POST['remember_me']) && $_POST['remember_me'] == 1) {
@@ -34,15 +35,20 @@ if (isset($_POST['submit'])) {
                 $cookie_value = $_SESSION['userId'];
                 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // Le cookie expire en 30 jours
             }
-
-            $success = 'Connexion réussie !';
-            header("Location: index.php");
-            exit();
+            // Redirection en fonction du rôle
+            if ($role == 'conducteur') {
+              echo "<script>alert('Connexion réussie !'); 
+              window.location.href='conducteur.php?userId=" . $_SESSION['userId'] . "';</script>";
+          } else {
+              echo "<script>alert('Connexion réussie !'); 
+              window.location.href='index.php?userId=" . $_SESSION['userId'] . "';</script>";
+          }
+          exit();
 
         } 
         else {
           $email_error = "L'adresse e-mail que vous avez saisie n'existe pas.";
-          header("Location: your_login_page.php?error=1");
+          header("Location: login.php?error=1");
           exit();
         }
     } else {
