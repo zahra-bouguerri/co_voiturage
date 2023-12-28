@@ -214,68 +214,7 @@ $conn->close();
 						      </tr>
 						    </thead>
 						    <tbody>
-						      <tr class="">
-						      	
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<span class="subheading">Rouiba</span>
-						        	</div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        
-							        	<span class="subheading">Ain taya</span>
-						        </div>
-						        </td>
-
-						       
-						      </tr><!-- END TR-->
-
-
-							  <tr class="">
-						      	
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<span class="subheading">Rouiba</span>
-						        	</div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        
-							        	<span class="subheading">Ain taya</span>
-						        </div>
-						        
-						      </tr><!-- END TR-->
-
-
-							  <tr class="">
-						      	
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<span class="subheading">Rouiba</span>
-						        	</div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        
-							        	<span class="subheading">Ain taya</span>
-						        </div>
-						        </td>
-
-						       
-						      </tr><!-- END TR-->
+					
 
 
 							  <tr class="">
