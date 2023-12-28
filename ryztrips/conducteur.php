@@ -210,103 +210,62 @@ $conn->close();
                
     <div class="car-list">
     <h2>Trajet proposé par les clients</h2>
-	    				<table class="table">
-						    <thead class="thead-primary">
-						      <tr class="text-center">
-						     
-						        <th class="bg-primary heading">Départ</th>
-						        <th class="bg-dark heading">Arrivée</th>
-						      </tr>
-						    </thead>
-						    <tbody>
-						      <tr class="">
-						      	
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<span class="subheading">Rouiba</span>
-						        	</div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        
-							        	<span class="subheading">Ain taya</span>
-						        </div>
-						        </td>
 
-						       
-						      </tr><!-- END TR-->
+            <div class="form-container">
+                <!-- Contenu du deuxième formulaire -->
+                <?php
+// Inclure le fichier de configuration de la base de données
+include "../config/connect.php";
 
+// Récupérer les trajets proposés depuis la base de données
+$sql = "SELECT depart, arrivee FROM trajet_propose";
+$result = $conn->query($sql);
 
-							  <tr class="">
-						      	
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<span class="subheading">Rouiba</span>
-						        	</div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        
-							        	<span class="subheading">Ain taya</span>
-						        </div>
-						        
-						      </tr><!-- END TR-->
+// Vérifier s'il y a des résultats
+if ($result->num_rows > 0) {
+    // Afficher les résultats dans le tableau HTML
+    echo '<div class="car-list">
+  
+    <table class="table">
+        <thead class="thead-primary">
+            <tr class="text-center">
+                <th class="bg-primary heading fixed-column">Départ</th>
+                <th class="bg-dark heading fixed-column">Arrivée</th>
+            </tr>
+        </thead>
+        <tbody>';
 
+        while ($row = $result->fetch_assoc()) {
+            echo '<tr class="">
+                    <td class="price fixed-width-column" style="width: 10px; ">
+                        <div class="price-rate">
+                            <span class="subheading" style="width: 10px; ">' . $row["depart"] . '</span>
+                        </div>
+                    </td>
+                    <td class="price fixed-width-column" style="width: 10px; ">
+                        <div class="price-rate">
+                            <span class="subheading">' . $row["arrivee"] . '</span>
+                        </div>
+                    </td>
+                  </tr>';
+        }
+        
+    
 
-							  <tr class="">
-						      	
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<span class="subheading">Rouiba</span>
-						        	</div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        
-							        	<span class="subheading">Ain taya</span>
-						        </div>
-						        </td>
+    echo '</tbody>
+        </table>
+    </div>';
+} else {
+    echo "Aucun trajet proposé trouvé.";
+}
 
-						       
-						      </tr><!-- END TR-->
+// Fermer la connexion à la base de données
+$conn->close();
+?>
+    
+            
+        </div>
 
-
-							  <tr class="">
-						      	
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<span class="subheading">Rouiba</span>
-						        	</div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        
-							        	<span class="subheading">Ain taya</span>
-						        </div>
-						        </td>
-
-						        
-						      </tr><!-- END TR-->
-
-                             
-						    </tbody>
-						  </table>
 					  </div>
             </div>
         </div>
