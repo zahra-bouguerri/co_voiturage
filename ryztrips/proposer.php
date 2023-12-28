@@ -1,19 +1,4 @@
-<?php include "./includes/header.php"?>  
-<?php
-// Informations de connexion à la base de données
-$host = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$dbname = "covoiturage"; 
-
-// Tentative de connexion à la base de données
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// Vérification de la connexion
-if ($conn->connect_error) {
-    die("La connexion à la base de données a échoué : " . $conn->connect_error);
-}
-
+<?php include "./includes/header.php"; 
 // Traitement du formulaire
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $lieu_depart = $_POST["lieu_depart"];
@@ -23,14 +8,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $requete = "INSERT INTO trajet_propose (depart, arrivee) VALUES ('$lieu_depart', '$lieu_arrivee')";
 
     if ($conn->query($requete) === TRUE) {
-        echo "Trajet proposé avec succès.";
+        echo "<script>alert('Trajet proposé avec succès');</script>";
+ 
     } else {
-        echo "Erreur lors de la proposition du trajet : " . $conn->error;
+        echo "<script>alert('Erreur lors de la proposition du trajet');</script>";
+    
     }
 }
-
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
         .form-container {
             background-color: #f2f2f2;
