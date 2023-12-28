@@ -1,0 +1,5 @@
+# Ignorer les fichiers générés
+ryztrips/.DS_Store
+.DS_Store
+# Ignorer les fichiers de sauvegarde
+*.save
