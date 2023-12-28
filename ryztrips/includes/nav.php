@@ -16,12 +16,15 @@
                 <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
 
                 <?php
-                // Check if the user is a conductor
-                if ($_SESSION['loggedIn'] && $_SESSION['role'] == 'conducteur') {
-                    echo '<li class="nav-item"><a href="conducteur.php?id=' . $_SESSION['userId'] . '" class="nav-link">Gérer </a></li>';
+                // Check if the 'loggedIn' key and 'role' key are set in the $_SESSION array
+                if (isset($_SESSION['loggedIn']) && isset($_SESSION['role'])) {
+                    // Check if the user is a conductor
+                    if ($_SESSION['loggedIn'] && $_SESSION['role'] == 'conducteur') {
+                        echo '<li class="nav-item"><a href="conducteur.php?id=' . $_SESSION['userId'] . '" class="nav-link">Gérer </a></li>';
+                    }
                 }
                 ?>
-                <li class="nav-item "><a href="register.php" class="nav-link btn btn-primary small-btn">Inscription</a></li>
+                <li class="nav-item"><a href="register.php" class="nav-link btn btn-primary small-btn">Inscription</a></li>
                 &nbsp;&nbsp;&nbsp;
                 <li class="nav-item"><a href="login.php" class="nav-link btn btn-primary small-btn">Connexion</a></li>
             </ul>

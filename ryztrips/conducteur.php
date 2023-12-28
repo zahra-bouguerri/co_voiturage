@@ -23,10 +23,6 @@
             margin-bottom: 5px;
         }
     </style>
-    
-  
-
-  
 
     <section class="ftco-section services-section img" style="background-image: url(images/conducteur.avif);">
     	<div class="overlay"></div>
@@ -51,7 +47,6 @@
 
 	<?php
 // Inclure votre connexion à la base de données ici
-include('../config/connect.php');
 
 // Récupérer l'ID du conducteur (vous devrez ajuster selon votre logique d'authentification)
 $id_conducteur = 1; // Remplacez ceci par la logique appropriée pour obtenir l'ID du conducteur actuel

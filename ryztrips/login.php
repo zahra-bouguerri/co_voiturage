@@ -1,6 +1,5 @@
 <?php
 include('../config/connect.php');
-session_start();
 
 if (isset($_POST['submit'])) {
     // Logique de connexion
