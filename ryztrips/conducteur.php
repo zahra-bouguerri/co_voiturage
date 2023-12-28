@@ -151,8 +151,6 @@ function confirmerSuppression(id_trajet) {
     echo "Erreur lors de la préparation de la requête : " . $conn->error;
 }
 
-// Fermer la connexion à la base de données
-$conn->close();
 ?>
 
 </br>
@@ -203,49 +201,43 @@ $conn->close();
             <div class="form-container">
                 <!-- Contenu du deuxième formulaire -->
                
-    <div class="car-list">
+                <div class="car-list">
     <h2>Trajet proposé par les clients</h2>
-	    				<table class="table">
-						    <thead class="thead-primary">
-						      <tr class="text-center">
-						     
-						        <th class="bg-primary heading">Départ</th>
-						        <th class="bg-dark heading">Arrivée</th>
-						      </tr>
-						    </thead>
-						    <tbody>
-					
+    <table class="table">
+        <thead class="thead-primary">
+            <tr class="text-center">
+                <th class="bg-primary heading">Départ</th>
+                <th class="bg-dark heading">Arrivée</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Assuming $conn is your database connection
+            $query = "SELECT depart, arrivee FROM trajet_propose";
+            $result = mysqli_query($conn, $query);
 
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<tr>
+                            <td class="price">
+                                <span class="subheading">' . htmlspecialchars($row['depart']) . '</span>
+                            </td>
+                            <td class="price">
+                                <span class="subheading">' . htmlspecialchars($row['arrivee']) . '</span>
+                            </td>
+                          </tr>';
+                }
+            } else {
+                echo 'Error executing query: ' . mysqli_error($conn);
+            }
 
-							  <tr class="">
-						      	
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        	<span class="subheading">Rouiba</span>
-						        	</div>
-						        </td>
-						        
-						        <td class="price">
-						        	<p class="btn-custom"><a href="#">Rent a car</a></p>
-						        	<div class="price-rate">
-							        
-							        	<span class="subheading">Ain taya</span>
-						        </div>
-						        </td>
-
-						        
-						      </tr><!-- END TR-->
-
-                             
-						    </tbody>
-						  </table>
-					  </div>
+            ?>
+        </tbody>
+    </table>
+</div>
             </div>
         </div>
     </div>
-</div>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
