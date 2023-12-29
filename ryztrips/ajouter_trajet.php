@@ -11,8 +11,8 @@ if (isset($_POST['ajouter'])) {
     $date = $_POST['date'];
     $heure = $_POST['heure'];
 
-    // Récupérer les données du conducteur (vous devrez ajuster selon votre logique d'authentification)
-    $id_conducteur = 1; // Remplacez ceci par la logique appropriée pour obtenir l'ID du conducteur actuel
+    if (isset($_SESSION['userId'])) {
+        $id_conducteur = $_SESSION['userId'];}
 
     // Préparer la requête SQL d'insertion dans la table Trajet
     $query = "INSERT INTO Trajet (lieu_depart, destination, nb_places_dispo, prix, date_trajet, heure_depart, id_conducteur) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -23,9 +23,10 @@ if (isset($_POST['ajouter'])) {
 
     // Exécuter la requête
     if ($stmt->execute()) {
-        echo "Le trajet a été ajouté avec succès.";
+        echo "<script>alert('Le trajet a été ajouté avec succès !'); window.location.href='conducteur.php?userId=" . $_SESSION['userId'] . "';</script>";
+        
     } else {
-        echo "Erreur lors de l'ajout du trajet : " . $stmt->error;
+        echo "<script>alert('Erreur lors de l'ajout du trajet !'); window.location.href='conducteur.php?userId=" . $_SESSION['userId'] . "';</script>";
     }
 
     // Fermer la déclaration préparée

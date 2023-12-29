@@ -8594,49 +8594,22 @@ h1, h2, h3, h4, h5,
       .search-property-1 .form-group .icon {
         right: 10px; } }
 
-.car-wrap {
-  margin-bottom: 40px; }
-  .car-wrap .img {
-    width: 100%;
-    height: 200px; }
-  .car-wrap .price-wrap {
-    padding: 10px;
-    position: relative;
-    display: inline-block;
-    background: #fff;
-    -webkit-box-shadow: -10px 10px 25px -15px rgba(0, 0, 0, 0.17);
-    -moz-box-shadow: -10px 10px 25px -15px rgba(0, 0, 0, 0.17);
-    box-shadow: -10px 10px 25px -15px rgba(0, 0, 0, 0.17); }
-    .car-wrap .price-wrap .rate {
-      font-size: 24px;
-      font-weight: 300;
-      color: #fc983c;
-      line-height: 1.1; }
-    .car-wrap .price-wrap .from-day {
-      margin-bottom: 0;
-      padding-left: 10px; }
-      .car-wrap .price-wrap .from-day span {
-        font-size: 9px;
-        line-height: 1.3;
-        display: block;
-        color: #000000;
-        text-transform: uppercase; }
-        .car-wrap .price-wrap .from-day span:first-child {
-          color: rgba(0, 0, 0, 0.3); }
   .car-wrap .text {
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    border-top: none; }
-    .car-wrap .text h2 {
-      font-size: 18px; }
+    border: 3px solid #fc983c ;
+   }
+    .car-wrap .text h5 {
+      font-size: 12px; }
       .car-wrap .text h2 a {
         color: #000000; }
+        .car-wrap .text h6  {
+          font-size: 13px;}
     .car-wrap .text span {
       font-size: 12px;
       text-transform: uppercase;
       font-weight: 600;
       letter-spacing: 2px;
       color: rgba(0, 0, 0, 0.4);
-      display: block;
+   
       margin-bottom: 20px; }
     .car-wrap .text p.d-block {
       width: 100%; }

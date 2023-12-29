@@ -27,34 +27,7 @@
 	  </div>
           <div class="col-lg-2 col"></div>
           <div class="col-lg-4 col-md-6 mt-0 mt-md-5 d-flex">
-          	<!--<form action="#" class="request-form ftco-animate">
-          		<h2>Make your trip</h2>
-	    				<div class="form-group">
-	    					<label for="" class="label">Pick-up location</label>
-	    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-	    				</div>
-	    				<div class="form-group">
-	    					<label for="" class="label">Drop-off location</label>
-	    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-	    				</div>
-	    				<div class="d-flex">
-	    					<div class="form-group mr-2">
-	                <label for="" class="label">Pick-up date</label>
-	                <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
-	              </div>
-	              <div class="form-group ml-2">
-	                <label for="" class="label">Drop-off date</label>
-	                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
-	              </div>
-              </div>
-              <div class="form-group">
-                <label for="" class="label">Pick-up time</label>
-                <input type="text" class="form-control" id="time_pick" placeholder="Time">
-              </div>
-	            <div class="form-group">
-	              <input type="submit" value="Search Vehicle" class="btn btn-primary py-3 px-4">
-	            </div>
-	    			</form>-->
+    
           </div>
         </div>
       </div>
@@ -193,197 +166,90 @@
             <h2 class="mb-2">choisissez votre trajet</h2>
           </div>
         </div>
-    		<div class="row">
-    			<div class="col-md-3">
-    				<div class="car-wrap ftco-animate">
-    					<div class="img d-flex align-items-end" style="background-image: url(images/car-1.jpg);">
-    						<div class="price-wrap d-flex">
-    							<span class="rate">1500 DA</span>
-    						
-    						</div>
-    					</div>
-						
-    					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
-						</br>
-    						<span>conducteur : Hamza</span>
-							<span>voiture : Audi</span>
-							<span>place disponible : 5</span>
-    						<p ><a href="reserver.php" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-3">
-    				<div class="car-wrap ftco-animate">
-    					<div class="img d-flex align-items-end" style="background-image: url(images/car-2.jpg);">
-    						<div class="price-wrap d-flex">
-    							<span class="rate">$25</span>
-    							<p class="from-day">
-    								<span>From</span>
-    								<span>/Day</span>
-    							</p>
-    						</div>
-    					</div>
-    					
-    					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
-						</br>
-    						<span>conducteur : Hamza</span>
-							<span>voiture : Audi</span>
-							<span>place disponible : 5</span>
-    						<p><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-3">
-    				<div class="car-wrap ftco-animate">
-    					<div class="img d-flex align-items-end" style="background-image: url(images/car-3.jpg);">
-    						<div class="price-wrap d-flex">
-    							<span class="rate">$25</span>
-    							<p class="from-day">
-    								<span>From</span>
-    								<span>/Day</span>
-    							</p>
-    						</div>
-    					</div>
-    					
-    					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
-						</br>
-    						<span>conducteur : Hamza</span>
-							<span>voiture : Audi</span>
-							<span>place disponible : 5</span>
-    						<p><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> </p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-3">
-    				<div class="car-wrap ftco-animate">
-    					<div class="img d-flex align-items-end" style="background-image: url(images/car-4.jpg);">
-    						<div class="price-wrap d-flex">
-    							<span class="rate">$25</span>
-    							<p class="from-day">
-    								<span>From</span>
-    								<span>/Day</span>
-    							</p>
-    						</div>
-    					</div>
-    					
-    					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
-						</br>
-    						<span>conducteur : Hamza</span>
-							<span>voiture : Audi</span>
-							<span>place disponible : 5</span>
-    						<p><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> </p>
-    					</div>
-    				</div>
-    			</div>
+		<?php
+// Set the number of records per page
+$records_per_page = 8;
 
-    			<div class="col-md-3">
-    				<div class="car-wrap ftco-animate">
-    					<div class="img d-flex align-items-end" style="background-image: url(images/car-5.jpg);">
-    						<div class="price-wrap d-flex">
-    							<span class="rate">$25</span>
-    							<p class="from-day">
-    								<span>From</span>
-    								<span>/Day</span>
-    							</p>
-    						</div>
-    					</div>
-    					
-    					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
-						</br>
-    						<span>conducteur : Hamza</span>
-							<span>voiture : Audi</span>
-							<span>place disponible : 5</span>
-    						<p ><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-3">
-    				<div class="car-wrap ftco-animate">
-    					<div class="img d-flex align-items-end" style="background-image: url(images/car-6.jpg);">
-    						<div class="price-wrap d-flex">
-    							<span class="rate">$25</span>
-    							<p class="from-day">
-    								<span>From</span>
-    								<span>/Day</span>
-    							</p>
-    						</div>
-    					</div>
-    					
-    					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
-						</br>
-    						<span>conducteur : Hamza</span>
-							<span>voiture : Audi</span>
-							<span>place disponible : 5</span>
-    						<p ><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> 
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-3">
-    				<div class="car-wrap ftco-animate">
-    					<div class="img d-flex align-items-end" style="background-image: url(images/car-7.jpg);">
-    						<div class="price-wrap d-flex">
-    							<span class="rate">$25</span>
-    							<p class="from-day">
-    								<span>From</span>
-    								<span>/Day</span>
-    							</p>
-    						</div>
-    					</div>
-    					
-    					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
-						</br>
-    						<span>conducteur : Hamza</span>
-							<span>voiture : Audi</span>
-							<span>place disponible : 5</span>
-    						<p ><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> 
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-3">
-    				<div class="car-wrap ftco-animate">
-    					<div class="img d-flex align-items-end" style="background-image: url(images/car-8.jpg);">
-    						<div class="price-wrap d-flex">
-    							<span class="rate">$25</span>
-    							<p class="from-day">
-    								<span>From</span>
-    								<span>/Day</span>
-    							</p>
-    						</div>
-    					</div>
-    					
-    					<div class="text p-4 text-center">
-    						<h2 class="mb-0"><a href="#">Rouiba -- ain taya</a></h2>
-						</br>
-    						<span>conducteur : Hamza</span>
-							<span>voiture : Audi</span>
-							<span>place disponible : 5</span>
-    						<p ><a href="#" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a> 
-    					</div>
-    				</div>
-    			</div>
-			</div>
-			<div class="row mt-5">
-				<div class="col text-center">
-				  <div class="block-27">
-					<ul>
-					  <li><a href="#">&lt;</a></li>
-					  <li class="active"><span>1</span></li>
-					  <li><a href="#">2</a></li>
-					  <li><a href="#">3</a></li>
-					  <li><a href="#">4</a></li>
-					  <li><a href="#">5</a></li>
-					  <li><a href="#">&gt;</a></li>
-					</ul>
-				  </div>
-				</div>
-			  </div>
+// Get the current page from the URL parameter
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Calculate the offset for the SQL query
+$offset = ($current_page - 1) * $records_per_page;
+
+// Fetch records for the current page
+$query = "SELECT t.*, c.* FROM trajet t
+          JOIN conducteur c ON t.id_conducteur = c.id_conducteur
+          LIMIT $records_per_page OFFSET $offset";
+$result = mysqli_query($conn, $query);
+?>
+<div class="row">
+    <?php 
+    if (mysqli_num_rows($result) > 0) {
+        // Loop through each row in the result set
+        while ($row = mysqli_fetch_assoc($result)) {
+    ?>
+        <div class="col-md-3">
+            <div class="car-wrap ">
+          
+                <div class="text p-4 ">
+                    <h4 class="mb-0"><a href="#"><?php echo $row['lieu_depart']?>&rarr;<?php echo $row['destination']?></a></h4>
+                    </br>
+					<h6><span>Date depart :</span> <?php echo $row['date_trajet']?></h6>
+					<h6><span>Heure depart :</span> <?php echo $row['heure_depart']?></h6>
+					<h6><span>Prix :</span> <?php echo $row['prix']?></h6>
+					<h6><span>conducteur :</span> <?php echo $row['nom']?></h6>
+                    <h6><span>voiture :</span> <?php echo $row['voiture']?></h6>
+                    <h6><span>place disponible : <?php echo $row['nb_places_dispo']?></h6>
+					<br>
+                    <p class="text-center"><a href="reserver.php" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a></p>
+                </div>
+				<br>
+            </div>
+        </div>
+		
+    <?php
+        } // Close the while loop
+    } else {
+        // No trips found
+        echo '<p>No trips available.</p>';
+    }
+  
+    ?>
+</div>
+<?php
+// Get the total number of records in the "trajet" table
+$total_records_query = "SELECT COUNT(*) as total FROM trajet";
+$total_records_result = $conn->query($total_records_query);
+
+if ($total_records_result) {
+    $total_records_row = $total_records_result->fetch_assoc();
+    $total_records = $total_records_row['total'];
+
+    // Calculate the total number of pages
+    $total_pages = ceil($total_records / $records_per_page);
+} else {
+    $total_pages = 0;
+}
+
+// Display pagination links
+?>
+<div class="row mt-5">
+    <div class="col text-center">
+        <div class="block-27">
+            <ul>
+                <?php
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    if ($i == $current_page) {
+                        echo "<li class='active'><span>$i</span></li>";
+                    } else {
+                        echo "<li><a href='?page=$i'>$i</a></li>";
+                    }
+                }
+                ?>
+            </ul>
+        </div>
+    </div>
+</div>
     	
     </section>
 
