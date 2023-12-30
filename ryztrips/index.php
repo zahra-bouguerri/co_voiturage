@@ -185,6 +185,7 @@ $offset = ($current_page - 1) * $records_per_page;
 // Fetch records for the current page
 $query = "SELECT t.*, c.* FROM trajet t
           JOIN conducteur c ON t.id_conducteur = c.id_conducteur
+          WHERE t.nb_places_dispo > 0
           LIMIT $records_per_page OFFSET $offset";
 $result = mysqli_query($conn, $query);
 ?>
