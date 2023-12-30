@@ -36,7 +36,7 @@
     </div>
 </section>
 <?php
-session_start();
+
 $_SESSION['userId'] = $_GET['userId'];
 $_SESSION['trajetId'] = $_GET['trajetId'];
 
@@ -45,6 +45,58 @@ $_SESSION['trajetId'] = $_GET['trajetId'];
 $trajetId = $_SESSION['trajetId'];
 $sql = "SELECT * FROM trajet WHERE id_trajet = $trajetId";
 $result = $conn->query($sql);
+
+// Vérification si le formulaire a été soumis
+if (isset($_POST['confirmer_reservation'])) {
+    // Récupération des valeurs de la session
+    $userId = $_SESSION['userId'];
+    $trajetId = $_SESSION['trajetId'];
+
+    // Vérifier si la réservation existe déjà pour ce client et ce trajet
+    $checkReservationQuery = "SELECT * FROM reservation WHERE id_client = $userId AND id_trajet = $trajetId";
+    $checkReservationResult = $conn->query($checkReservationQuery);
+
+    if ($checkReservationResult->num_rows > 0) {
+        // Une réservation existe déjà, affichez un message d'erreur ou effectuez une action appropriée
+        echo "<script>alert('Vous avez déjà réservé ce trajet.'); 
+              window.location.href='index.php?userId=" . $_SESSION['userId']. "';</script>";
+    } else {
+        // Vérifier si le nombre de places disponibles est supérieur à 0
+        $checkPlacesQuery = "SELECT nb_places_dispo FROM trajet WHERE id_trajet = $trajetId";
+        $checkPlacesResult = $conn->query($checkPlacesQuery);
+
+        if ($checkPlacesResult->num_rows > 0) {
+            $row = $checkPlacesResult->fetch_assoc();
+            $nbPlacesDispo = $row['nb_places_dispo'];
+
+            if ($nbPlacesDispo > 0) {
+                // Mettre à jour le nombre de places disponibles dans la table `trajet`
+                $updatePlacesQuery = "UPDATE trajet SET nb_places_dispo = nb_places_dispo - 1 WHERE id_trajet = $trajetId";
+
+                if ($conn->query($updatePlacesQuery) === FALSE) {
+                    echo "Erreur lors de la mise à jour du nombre de places disponibles : " . $conn->error;
+                }
+
+                // Insertion de la réservation dans la table `reservation`
+                $insertReservationQuery = "INSERT INTO reservation (id_client, id_trajet) VALUES ($userId, $trajetId)";
+
+                if ($conn->query($insertReservationQuery) === TRUE) {
+                    echo "<script>alert('Réservation réussie !'); 
+                          window.location.href='index.php?userId=" . $_SESSION['userId']. "';</script>";
+                } else {
+                    echo "Erreur lors de la réservation : " . $conn->error;
+                }
+            } else {
+                // Le nombre de places disponibles est épuisé, affichez un message d'erreur
+                echo "<script>alert('Désolé, le trajet est complet.'); 
+                      window.location.href='index.php?userId=" . $_SESSION['userId']. "';</script>";
+            }
+        } else {
+            echo "Erreur lors de la vérification du nombre de places disponibles : " . $conn->error;
+        }
+    }
+}
+
 
 // Affichage des informations dans le tableau
 if ($result->num_rows > 0) {
@@ -98,7 +150,11 @@ if ($result->num_rows > 0) {
                                 </tr>
                             </tbody>
                         </table>
-                        <input type="button" value="confirmer la reservation" class="form-control btn btn-primary">
+                       
+						<form method="post" action="">
+    					<input type="submit"  class="form-control btn btn-primary" name="confirmer_reservation" value="Confirmer la réservation">
+				</form>
+
                     </div>
                 </div>
             </div>
