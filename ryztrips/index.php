@@ -1,6 +1,6 @@
 <?php include "./includes/header.php"?>
 <?php
-session_start();
+
 $_SESSION['userId'] = $_GET['userId'];
 
 
@@ -252,7 +252,7 @@ if ($total_records_result) {
                     if ($i == $current_page) {
                         echo "<li class='active'><span>$i</span></li>";
                     } else {
-                        echo "<li><a href='?page=$i'>$i</a></li>";
+						echo "<li><a href='?page=$i&userId=" . $_SESSION['userId'] . "'>$i</a></li>";
                     }
                 }
                 ?>
