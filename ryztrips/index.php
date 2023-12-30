@@ -1,4 +1,10 @@
 <?php include "./includes/header.php"?>
+<?php
+session_start();
+$_SESSION['userId'] = $_GET['userId'];
+
+
+?>
 
     <div class="hero-wrap" style="background-image: url('images/bg_1.png');" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
@@ -201,7 +207,11 @@ $result = mysqli_query($conn, $query);
                     <h6><span>voiture :</span> <?php echo $row['voiture']?></h6>
                     <h6><span>place disponible : <?php echo $row['nb_places_dispo']?></h6>
 					<br>
-                    <p class="text-center"><a href="reserver.php" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a></p>
+					<p class="text-center">
+
+                    <a href="reserver.php?userId=<?php echo $_SESSION['userId']; ?>&trajetId=<?php echo $row['id_trajet']; ?>" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a>
+</p>
+
                 </div>
 				<br>
             </div>
