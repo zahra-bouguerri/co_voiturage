@@ -1,9 +1,12 @@
 <?php include "./includes/header.php"?>
 <?php
 
-$_SESSION['userId'] = $_GET['userId'];
+if (isset($_SESSION['userId'])) {
+    $userId = $_SESSION['userId'];
+} elseif (isset($_GET['userId'])) {
+    $userId = $_GET['userId'];
 
-
+}
 ?>
 
     <div class="hero-wrap" style="background-image: url('images/bg_1.png');" data-stellar-background-ratio="0.5">
