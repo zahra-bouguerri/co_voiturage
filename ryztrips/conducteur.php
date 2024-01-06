@@ -180,12 +180,12 @@ function confirmerSuppression(id_trajet) {
 		        		<div class="form-group">
 		        					<label for="" class="label">date de départ </label>
 		        					
-										<input type="date" class="form-control" name="date" id="book_pick_date">
+										<input type="text" class="form-control" name="date" id="book_pick_date">
 			            </div>
                         <div class="form-group">
 		        					<label for="" class="label">Heure de départ </label>
 		        					
-                                    <input type="time"name ="heure"  class="form-control" id="book_pick_time">
+                                    <input type="time" name ="heure"  class="form-control" id="book_pick_time">
 			             </div>
 		        			
                         <!-- Autres champs du formulaire... -->
