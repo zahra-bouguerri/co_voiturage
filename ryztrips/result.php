@@ -7,7 +7,7 @@ if (isset($_POST['btnr'])) {
     $depart = $_POST['depart'];
     $destination = $_POST['destination'];
     $dateFormulaire = $_POST['date'];
-    $heureFormulaire = $_POST['heure'];
+    
 
     // Convertir le format de date
     $date = DateTime::createFromFormat('m/d/Y', $dateFormulaire);
@@ -17,10 +17,10 @@ if (isset($_POST['btnr'])) {
     $depart = mysqli_real_escape_string($conn, $depart);
     $destination = mysqli_real_escape_string($conn, $destination);
     $dateFormatee = mysqli_real_escape_string($conn, $dateFormatee);
-    $heure = mysqli_real_escape_string($conn, $heureFormulaire);
+  
 
     // Requête SQL pour récupérer les trajets filtrés
-    $query = "SELECT * FROM trajet WHERE lieu_depart = '$depart' AND destination = '$destination' AND date_trajet = '$dateFormatee' AND heure_depart = '$heure'";
+    $query = "SELECT * FROM trajet WHERE lieu_depart = '$depart' AND destination = '$destination' AND date_trajet = '$dateFormatee' ";
 
     
 
@@ -53,25 +53,29 @@ if (isset($_POST['btnr'])) {
                             <table class="table">
                                 <thead class="thead-primary">
                                     <tr class="text-center">
-                                        <th class="bg-primary heading">Départ</th>
-                                        <th class="bg-dark heading">Arrivée</th>
-                                        <th class="bg-dark heading">Date</th>
-                                        <th class="bg-black heading">Heure</th>
-                                        <th class="bg-black heading">Prix</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr>";
-                                        echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['lieu_depart'] . "</span></div></td>";
-                                        echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['destination'] . "</span></div></td>";
-                                        echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['date_trajet'] . "</span></div></td>";
-                                        echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['heure_depart'] . "</span></div></td>";
-                                        echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><h3><span class='num'><small class='currency'></small>" . $row['prix'] . " DA</span></h3></div></td>";
-                                        echo "</tr>";
-                                    }
-                                    ?>
+                                    <th class="bg-primary heading">Départ</th>
+            <th class="bg-dark heading">Arrivée</th>
+            <th class="bg-dark heading">Date</th>
+            <th class="bg-black heading">Heure</th>
+            <th class="bg-black heading">Prix</th>
+            <th class="bg-primary heading">Réserver</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['lieu_depart'] . "</span></div></td>";
+            echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['destination'] . "</span></div></td>";
+            echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['date_trajet'] . "</span></div></td>";
+            echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['heure_depart'] . "</span></div></td>";
+            echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><h3><span class='num'><small class='currency'></small>" . $row['prix'] . " DA</span></h3></div></td>";
+            echo "<td class='price'><button type='button' class='btn btn-primary' title='réserver' onclick=\"window.location.href='reserver.php?id_trajet=" . $row['id_trajet'] . "'\">
+                <i class='fas fa-car'></i>
+            </button></td>";
+            echo "</tr>";
+                         }
+                            ?>
                                 </tbody>
                             </table>
                         </div>

@@ -74,17 +74,7 @@ if (isset($_SESSION['userId'])) {
 			              </div>
 		        			</div>
 		        		
-		        			<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="#">heure de départ</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-										<input type="time" name ="heure" class="form-control" id="book_pick_time">
-		                      
-		                    </div>
-				              </div>
-			              </div>
-		        			</div>
+		        		
 							<div class="col-lg align-items-end">
 		        				<div class="form-group">
 		        					<label for="#">date de départ </label>
