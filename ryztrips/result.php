@@ -12,7 +12,7 @@ if (isset($_POST['btnr'])) {
     // Convertir le format de date
     $date = DateTime::createFromFormat('m/d/Y', $dateFormulaire);
     $dateFormatee = $date->format('Y-m-d');
-
+    $userId = isset($_POST['userId']) ? $_POST['userId'] : null;
     // Échappe les valeurs pour éviter les injections SQL (optionnel mais recommandé)
     $depart = mysqli_real_escape_string($conn, $depart);
     $destination = mysqli_real_escape_string($conn, $destination);
@@ -70,10 +70,10 @@ if (isset($_POST['btnr'])) {
             echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['date_trajet'] . "</span></div></td>";
             echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['heure_depart'] . "</span></div></td>";
             echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><h3><span class='num'><small class='currency'></small>" . $row['prix'] . " DA</span></h3></div></td>";
-            echo "<td class='price'><button type='button' class='btn btn-primary' title='réserver' onclick=\"window.location.href='reserver.php?id_trajet=" . $row['id_trajet'] . "'\">
-                <i class='fas fa-car'></i>
-            </button></td>";
-            echo "</tr>";
+            echo "<td class='price'><button type='button' class='btn btn-primary' title='réserver' onclick=\"window.location.href='reserver.php?trajetId=" . $row['id_trajet'] . "&userId=" . $userId . "'\">
+            <i class='fas fa-car'></i>
+        </button></td>";
+        echo "</tr>";
                          }
                             ?>
                                 </tbody>

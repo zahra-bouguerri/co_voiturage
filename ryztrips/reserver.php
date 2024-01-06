@@ -37,7 +37,7 @@
 </section>
 <?php
 
-session_start(); // Assurez-vous d'avoir démarré la session si ce n'est pas déjà le cas
+
 
 $_SESSION['userId'] = $_GET['userId'];
 $_SESSION['trajetId'] = $_GET['trajetId'];

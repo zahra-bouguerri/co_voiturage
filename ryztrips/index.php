@@ -44,6 +44,7 @@ if (isset($_SESSION['userId'])) {
 
     <section class="ftco-section ftco-no-pb ftco-no-pt">
 	<form action="result.php" method="post" class="search-property-1">
+	<input type="hidden" name="userId" value="<?php echo isset($userId) ? $userId : ''; ?>">
     	<div class="container">
 	    	<div class="row">
 					<div class="col-md-12">
@@ -88,7 +89,7 @@ if (isset($_SESSION['userId'])) {
 		        			<div class="col-lg align-self-end">
 		        				<div class="form-group">
 		        					<div class="form-field">
-										<input type="submit" value="Recherche" name="btnr" class="form-control btn btn-primary" onclick="redirectToSearchPage()">
+										<input type="submit" value="Recherche" name="btnr" class="form-control btn btn-primary"  onclick="redirectToSearchPage()">
 								
 				              </div>
 			              </div>
