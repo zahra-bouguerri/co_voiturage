@@ -196,7 +196,7 @@ $result = mysqli_query($conn, $query);
             <div class="car-wrap ">
           
                 <div class="text p-4 ">
-                    <h4 class="mb-0"><a href="#"><?php echo $row['lieu_depart']?>&rarr;<?php echo $row['destination']?></a></h4>
+                    <h5 class="mb-0" style='text-align: center;'><a href="#" style='font-weight: bold;'><?php echo $row['lieu_depart']?>&rarr;<?php echo $row['destination']?></a></h5>
                     </br>
 					<h6><span>Date depart :</span> <?php echo $row['date_trajet']?></h6>
 					<h6><span>Heure depart :</span> <?php echo $row['heure_depart']?></h6>
@@ -206,9 +206,19 @@ $result = mysqli_query($conn, $query);
                     <h6><span>place disponible : <?php echo $row['nb_places_dispo']?></h6>
 					<br>
 					<p class="text-center">
+						<?php
+	
+						if(isset($_SESSION['userId'])) {
+							$reservationLink = "reserver.php?userId=" . $_SESSION['userId'] . "&trajetId=" . $row['id_trajet'];
+							?>
+							<a href="<?php echo $reservationLink; ?>" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a>
+							<?php
+						} else {
+							echo "<script>alert('Veuillez vous connecter avant de réserver.')</script>";
 
-                    <a href="reserver.php?userId=<?php echo $_SESSION['userId']; ?>&trajetId=<?php echo $row['id_trajet']; ?>" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a>
-</p>
+						}
+						?>
+                       </p>
 
                 </div>
 				<br>
@@ -265,46 +275,46 @@ if ($total_records_result) {
     	<div class="overlay"></div>
     	<div class="container">
     		<div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-          	<span class="subheading">Work flow</span>
-            <h2 class="mb-3">How it works</h2>
-          </div>
-        </div>
-    		<div class="row">
-    			<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services services-2">
-              <div class="media-body py-md-4 text-center">
-              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-                <h3>Pick Destination</h3>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services services-2">
-              <div class="media-body py-md-4 text-center">
-              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-select"></span></div>
-                <h3>Select Term</h3>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services services-2">
-              <div class="media-body py-md-4 text-center">
-              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
-                <h3>Choose A Car</h3>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services services-2">
-              <div class="media-body py-md-4 text-center">
-              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-review"></span></div>
-                <h3>Enjoy The Ride</h3>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
-              </div>
+			<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+    <span class="subheading">Processus de travail</span>
+    <h2 class="mb-3">Comment ça marche</h2>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+        <div class="media block-6 services services-2">
+            <div class="media-body py-md-4 text-center">
+                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+                <h3>Sélectionnez votre destination</h3>
+                <p>Choisissez la destination de votre choix en un clic. Un petit ruisseau nommé Duden coule près de leur place et l'approvisionne en lettres séparées.</p>
+            </div>
+        </div>      
+    </div>
+    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+        <div class="media block-6 services services-2">
+            <div class="media-body py-md-4 text-center">
+                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-select"></span></div>
+                <h3>Choisissez votre trajet</h3>
+                <p>Sélectionnez le trajet qui vous aide à atteindre votre destination rapidement. Un petit ruisseau nommé Duden coule près de leur place et l'approvisionne en lettres séparées.</p>
+            </div>
+        </div>      
+    </div>
+    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+        <div class="media block-6 services services-2">
+            <div class="media-body py-md-4 text-center">
+                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
+                <h3>Réservez votre place</h3>
+                <p>Réservez votre place pour assurer votre confort pendant le trajet. Un petit ruisseau nommé Duden coule près de leur place et l'approvisionne en lettres séparées.</p>
+            </div>
+        </div>      
+    </div>
+    <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+        <div class="media block-6 services services-2">
+            <div class="media-body py-md-4 text-center">
+                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-review"></span></div>
+                <h3>Profitez du trajet</h3>
+                <p>Détendez-vous et profitez du trajet en attendant le chauffeur. Un petit ruisseau nommé Duden coule près de leur place et l'approvisionne en lettres séparées.</p>
+            </div>
             </div>      
           </div>
     		</div>
@@ -332,6 +342,65 @@ if ($total_records_result) {
 		</section>
 
     <section class="ftco-section">
+		
+	<div id="myMap" style="position:relative;height:400px;"></div>
+	
+	 <!-- Reference to the Bing Maps SDK -->
+	 <script type='text/javascript'
+            src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AoiyGy03-LqmZBoXyAArp6u-Rt9nobOLSDd5YoZ6lA1VD9IykV4v1F45td0Yw4Zs' 
+            async defer></script>
+    
+
+	
+<script type='text/javascript'>
+function GetMap() {
+    var map = new Microsoft.Maps.Map('#myMap');
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                var loc = new Microsoft.Maps.Location(position.coords.latitude, position.coords.longitude);
+                map.setView({ center: loc, zoom: 15 });
+                // You can also add a pushpin at the user's location if needed.
+                var pin = new Microsoft.Maps.Pushpin(loc);
+                map.entities.push(pin);
+				
+            },
+            function (error) {
+                handleLocationError(error, map.getCenter());
+            }
+        );
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError({ code: 0, message: 'Geolocation is not supported.' }, map.getCenter());
+    }
+}
+
+function handleLocationError(error, center) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+        default:
+            alert("An error occurred: " + error.message);
+            break;
+    }
+
+    // Center the map on a default location.
+    var map = new Microsoft.Maps.Map('#myMap');
+    map.setView({ center: center, zoom: 12 });
+}
+</script>
     </section>	
 	<?php include "./includes/footer.php";?>
 

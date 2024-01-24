@@ -180,11 +180,11 @@ function confirmerSuppression(id_trajet) {
 		        		<div class="form-group">
 		        					<label for="" class="label">date de départ </label>
 		        					
-<<<<<<< HEAD
+
 										<input type="date" class="form-control" name="date" id="book_pick_date" min="<?php echo date('Y-m-d'); ?>">
-=======
+
 										<input type="text" class="form-control" name="date" id="book_pick_date">
->>>>>>> 871d2abd8deb3b663d4fd28c1af4960d6d8b14ce
+
 			            </div>
                         <div class="form-group">
 		        					<label for="" class="label">Heure de départ </label>
@@ -241,7 +241,7 @@ function confirmerSuppression(id_trajet) {
             </div>
         </div>
     </div>
-    
+    </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
