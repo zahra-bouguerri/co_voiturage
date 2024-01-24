@@ -180,7 +180,7 @@ function confirmerSuppression(id_trajet) {
 		        		<div class="form-group">
 		        					<label for="" class="label">date de départ </label>
 		        					
-										<input type="date" class="form-control" name="date" id="book_pick_date">
+										<input type="date" class="form-control" name="date" id="book_pick_date" min="<?php echo date('Y-m-d'); ?>">
 			            </div>
                         <div class="form-group">
 		        					<label for="" class="label">Heure de départ </label>
