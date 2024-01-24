@@ -43,6 +43,8 @@ if (isset($_SESSION['userId'])) {
     </div>
 
     <section class="ftco-section ftco-no-pb ftco-no-pt">
+	<form action="result.php" method="post" class="search-property-1">
+	<input type="hidden" name="userId" value="<?php echo isset($userId) ? $userId : ''; ?>">
     	<div class="container">
 	    	<div class="row">
 					<div class="col-md-12">
@@ -57,7 +59,7 @@ if (isset($_SESSION['userId'])) {
 		        					<label for="#">endroit de départ</label>
 		        					<div class="form-field">
 		          					<div class="select-wrap">
-							  <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+							  <input type="text" class="form-control" name="depart" placeholder="City, Airport, Station, etc">
 		                    </div>
 				              </div>
 			              </div>
@@ -67,28 +69,19 @@ if (isset($_SESSION['userId'])) {
 		        					<label for="#">endroit d'arrivée</label>
 		        					<div class="form-field">
 		          					<div class="select-wrap">
-										<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+										<input type="text" class="form-control" name="destination" placeholder="City, Airport, Station, etc">
 		                    </div>
 				              </div>
 			              </div>
 		        			</div>
-		        			<div class="col-lg align-items-end">
+		        		
+		        		
+							<div class="col-lg align-items-end">
 		        				<div class="form-group">
 		        					<label for="#">date de départ </label>
 		        					<div class="form-field">
 		          					<div class="select-wrap">
-										<input type="date" class="form-control" id="book_pick_date">
-		                    </div>
-				              </div>
-			              </div>
-		        			</div>
-		        			<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="#">heure de départ</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-										<input type="time" class="form-control" id="book_pick_time">
-		                      
+										<input type="text" class="form-control" name ="date" id="book_pick_date"  required>
 		                    </div>
 				              </div>
 			              </div>
@@ -96,17 +89,18 @@ if (isset($_SESSION['userId'])) {
 		        			<div class="col-lg align-self-end">
 		        				<div class="form-group">
 		        					<div class="form-field">
-										<input type="button" value="Recherche" class="form-control btn btn-primary" onclick="redirectToSearchPage()">
+										<input type="submit" value="Recherche" name="btnr" class="form-control btn btn-primary"  onclick="redirectToSearchPage()">
 								
 				              </div>
 			              </div>
 		        			</div>
 		        		</div>
-		        	</form>
+		       
 		        </div>
 					</div>
 	    	</div>
 	    </div>
+</form>
     </section>
 
     <section class="ftco-section services-section ftco-no-pt ftco-no-pb">

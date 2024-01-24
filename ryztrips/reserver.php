@@ -37,9 +37,10 @@
 </section>
 <?php
 
+
+
 $_SESSION['userId'] = $_GET['userId'];
 $_SESSION['trajetId'] = $_GET['trajetId'];
-
 
 // Récupération des informations du trajet
 $trajetId = $_SESSION['trajetId'];
@@ -53,122 +54,168 @@ if (isset($_POST['confirmer_reservation'])) {
     $trajetId = $_SESSION['trajetId'];
 
     // Vérifier si la réservation existe déjà pour ce client et ce trajet
-    $checkReservationQuery = "SELECT * FROM reservation WHERE id_client = $userId AND id_trajet = $trajetId";
-    $checkReservationResult = $conn->query($checkReservationQuery);
+    $checkReservationQuery = "SELECT * FROM reservation WHERE id_client = ? AND id_trajet = ?";
+    $stmtCheckReservation = $conn->prepare($checkReservationQuery);
 
-    if ($checkReservationResult->num_rows > 0) {
-        // Une réservation existe déjà, affichez un message d'erreur ou effectuez une action appropriée
-        echo "<script>alert('Vous avez déjà réservé ce trajet.'); 
-              window.location.href='index.php?userId=" . $_SESSION['userId']. "';</script>";
-    } else {
-        // Vérifier si le nombre de places disponibles est supérieur à 0
-        $checkPlacesQuery = "SELECT nb_places_dispo FROM trajet WHERE id_trajet = $trajetId";
-        $checkPlacesResult = $conn->query($checkPlacesQuery);
+    // Vérification de la préparation de la requête
+    if ($stmtCheckReservation) {
+        // Liaison des paramètres et exécution de la requête
+        $stmtCheckReservation->bind_param("ii", $userId, $trajetId);
+        $stmtCheckReservation->execute();
 
-        if ($checkPlacesResult->num_rows > 0) {
-            $row = $checkPlacesResult->fetch_assoc();
-            $nbPlacesDispo = $row['nb_places_dispo'];
+        $checkReservationResult = $stmtCheckReservation->get_result();
 
-            if ($nbPlacesDispo > 0) {
-                // Mettre à jour le nombre de places disponibles dans la table `trajet`
-                $updatePlacesQuery = "UPDATE trajet SET nb_places_dispo = nb_places_dispo - 1 WHERE id_trajet = $trajetId";
-
-                if ($conn->query($updatePlacesQuery) === FALSE) {
-                    echo "Erreur lors de la mise à jour du nombre de places disponibles : " . $conn->error;
-                }
-
-                // Insertion de la réservation dans la table `reservation`
-                $insertReservationQuery = "INSERT INTO reservation (id_client, id_trajet) VALUES ($userId, $trajetId)";
-
-                if ($conn->query($insertReservationQuery) === TRUE) {
-                    echo "<script>alert('Réservation réussie !'); 
-                          window.location.href='index.php?userId=" . $_SESSION['userId']. "';</script>";
-                } else {
-                    echo "Erreur lors de la réservation : " . $conn->error;
-                }
-            } else {
-                // Le nombre de places disponibles est épuisé, affichez un message d'erreur
-                echo "<script>alert('Désolé, le trajet est complet.'); 
-                      window.location.href='index.php?userId=" . $_SESSION['userId']. "';</script>";
-            }
+        if ($checkReservationResult->num_rows > 0) {
+            // Une réservation existe déjà, affichez un message d'erreur ou effectuez une action appropriée
+            echo "<script>alert('Vous avez déjà réservé ce trajet.'); 
+                  window.location.href='index.php?userId=" . $_SESSION['userId']. "';</script>";
         } else {
-            echo "Erreur lors de la vérification du nombre de places disponibles : " . $conn->error;
+            // Vérifier si le nombre de places disponibles est supérieur à 0
+            $checkPlacesQuery = "SELECT nb_places_dispo FROM trajet WHERE id_trajet = ?";
+            $stmtCheckPlaces = $conn->prepare($checkPlacesQuery);
+
+            // Vérification de la préparation de la requête
+            if ($stmtCheckPlaces) {
+                // Liaison des paramètres et exécution de la requête
+                $stmtCheckPlaces->bind_param("i", $trajetId);
+                $stmtCheckPlaces->execute();
+
+                $checkPlacesResult = $stmtCheckPlaces->get_result();
+
+                if ($checkPlacesResult->num_rows > 0) {
+                    $row = $checkPlacesResult->fetch_assoc();
+                    $nbPlacesDispo = $row['nb_places_dispo'];
+
+                    if ($nbPlacesDispo > 0) {
+                        // Mettre à jour le nombre de places disponibles dans la table `trajet`
+                        $updatePlacesQuery = "UPDATE trajet SET nb_places_dispo = nb_places_dispo - 1 WHERE id_trajet = ?";
+
+                        $stmtUpdatePlaces = $conn->prepare($updatePlacesQuery);
+
+                        // Vérification de la préparation de la requête
+                        if ($stmtUpdatePlaces) {
+                            // Liaison des paramètres et exécution de la requête
+                            $stmtUpdatePlaces->bind_param("i", $trajetId);
+
+                            if ($stmtUpdatePlaces->execute()) {
+                                // Insertion de la réservation dans la table `reservation`
+                                $insertReservationQuery = "INSERT INTO reservation (id_client, id_trajet) VALUES (?, ?)";
+                                $stmtInsertReservation = $conn->prepare($insertReservationQuery);
+
+                                // Vérification de la préparation de la requête
+                                if ($stmtInsertReservation) {
+                                    // Liaison des paramètres et exécution de la requête
+                                    $stmtInsertReservation->bind_param("ii", $userId, $trajetId);
+
+                                    if ($stmtInsertReservation->execute()) {
+                                        echo "<script>alert('Réservation réussie !'); 
+                                              window.location.href='index.php?userId=" . $_SESSION['userId']. "';</script>";
+                                    } else {
+                                        echo "Erreur lors de l'exécution de la requête d'insertion de réservation : " . $stmtInsertReservation->error;
+                                    }
+
+                                    // Fermeture de la requête préparée
+                                    $stmtInsertReservation->close();
+                                } else {
+                                    echo "Erreur lors de la préparation de la requête d'insertion de réservation : " . $conn->error;
+                                }
+                            } else {
+                                echo "Erreur lors de la mise à jour du nombre de places disponibles : " . $stmtUpdatePlaces->error;
+                            }
+
+                            // Fermeture de la requête préparée
+                            $stmtUpdatePlaces->close();
+                        } else {
+                            echo "Erreur lors de la préparation de la requête de mise à jour du nombre de places disponibles : " . $conn->error;
+                        }
+                    } else {
+                        // Le nombre de places disponibles est épuisé, affichez un message d'erreur
+                        echo "<script>alert('Désolé, le trajet est complet.'); 
+                              window.location.href='index.php?userId=" . $_SESSION['userId']. "';</script>";
+                    }
+                } else {
+                    echo "Erreur lors de la vérification du nombre de places disponibles : " . $stmtCheckPlaces->error;
+                }
+
+                // Fermeture de la requête préparée
+                $stmtCheckPlaces->close();
+            } else {
+                echo "Erreur lors de la préparation de la requête de vérification du nombre de places disponibles : " . $conn->error;
+            }
         }
+
+        // Fermeture de la requête préparée
+        $stmtCheckReservation->close();
+    } else {
+        echo "Erreur lors de la préparation de la requête de vérification de réservation existante : " . $conn->error;
     }
 }
-
-
 // Affichage des informations dans le tableau
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-?>
-    <section class="ftco-section ftco-cart">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 ftco-animate">
-                    <div class="car-list">
-                        <table class="table">
-                            <thead class="thead-primary">
-                                <tr class="text-center">
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <th class="bg-primary heading">nombre de places disponible</th>
-                                    <th class="bg-dark heading">heure de depart</th>
-                                    <th class="bg-black heading">Prix</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td class="car-image"><div class="img" style="background-image:url(images/car-1.jpg);"></div></td>
-                                    <td class="product-name">
-                                        <h3><?php echo $row['lieu_depart'] . ' -- ' . $row['destination']; ?></h3>
-                                        <p class="mb-0 rated">
-                                            le <?php echo $row['date_trajet']; ?>
-                                        </p>
-                                    </td>
-                                    <td class="price">
-                                        <div class="price-rate">
-                                            <span class="subheading"><?php echo $row['nb_places_dispo']; ?> places </span>
-                                        </div>
-                                    </td>
-                                    <td class="price">
-                                        <p class="btn-custom"><a href="#">Rent a car</a></p>
-                                        <div class="price-rate">
-                                            <h3>
-                                                <span class="num"><small class="currency"></small> <?php echo date("h:i a", strtotime($row['heure_depart'])); ?></span>
-                                            </h3>
-                                        </div>
-                                    </td>
-                                    <td class="price">
-                                        <div class="price-rate">
-                                            <h3>
-                                                <span class="num"><small class="currency"></small> <?php echo $row['prix']; ?> DA</span>
-                                                <span class="per">/par place</span>
-                                            </h3>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                       
-						<form method="post" action="">
-    					<input type="submit"  class="form-control btn btn-primary" name="confirmer_reservation" value="Confirmer la réservation">
-				</form>
-
+        echo '
+        <section class="ftco-section ftco-cart">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 ftco-animate">
+                        <div class="car-list">
+                            <table class="table">
+                                <thead class="thead-primary">
+                                    <tr class="text-center">
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th class="bg-primary heading">nombre de places disponible</th>
+                                        <th class="bg-dark heading">heure de depart</th>
+                                        <th class="bg-black heading">Prix</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="">
+                                        <td class="car-image"><div class="img" style="background-image:url(images/car-1.jpg);"></div></td>
+                                        <td class="product-name">
+                                            <h3>' . $row['lieu_depart'] . ' -- ' . $row['destination'] . '</h3>
+                                            <p class="mb-0 rated">
+                                                le ' . $row['date_trajet'] . '
+                                            </p>
+                                        </td>
+                                        <td class="price">
+                                            <div class="price-rate">
+                                                <span class="subheading">' . $row['nb_places_dispo'] . ' places </span>
+                                            </div>
+                                        </td>
+                                        <td class="price">
+                                            <p class="btn-custom"><a href="#">Rent a car</a></p>
+                                            <div class="price-rate">
+                                                <h3>
+                                                    <span class="num"><small class="currency"></small> ' . date("h:i a", strtotime($row['heure_depart'])) . '</span>
+                                                </h3>
+                                            </div>
+                                        </td>
+                                        <td class="price">
+                                            <div class="price-rate">
+                                                <h3>
+                                                    <span class="num"><small class="currency"></small> ' . $row['prix'] . ' DA</span>
+                                                    <span class="per">/par place</span>
+                                                </h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <form method="post" action="">
+                                <input type="submit"  class="form-control btn btn-primary" name="confirmer_reservation" value="Confirmer la réservation">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-<?php
+        </section>';
     }
-} else {
-    echo '<p>No data available.</p>';
 }
-
-// Fermeture de la connexion
 $conn->close();
 ?>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

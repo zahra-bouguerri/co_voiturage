@@ -6,7 +6,11 @@ $username = "root";
 $password = ""; 
 $dbname = "covoiturage"; 
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+// Reste du code
+
 // Tentative de connexion à la base de données
 $conn = new mysqli($host, $username, $password, $dbname);
 
