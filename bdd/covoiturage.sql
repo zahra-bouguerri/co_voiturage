@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2023 at 12:05 PM
+-- Generation Time: Jan 27, 2024 at 09:09 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `covoiturage`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `email`, `password`) VALUES
+(1, 'admin@admin.com', 'admin');
 
 -- --------------------------------------------------------
 
@@ -43,8 +62,9 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id_client`, `nom`, `prenom`, `adresse_client`, `mdp_client`, `numero_tel`, `is_verified`, `verification_token`) VALUES
-(1, 'Azzedine', 'Chalabi', 'agent@admin.com', '$2y$10$UqvQIVCzW43ob9H4j1EChuH7/wSNh3oSdBA0bohTJbTPUxcdsOOPy', 556096567, 0, '162527'),
-(2, 'Azzedine', 'Chalabi', 'agent7@admin.com', '$2y$10$mKMdR5tTaSyONbXPZCwAhOTTsMAX9Gsr2VlW1NLHXdxL5t39jOJ0i', 556096543, 0, '188208');
+(1, 'Azzedine', 'Chalabi', 'agent@admin.com', '$2y$10$UqvQIVCzW43ob9H4j1EChuH7/wSNh3oSdBA0bohTJbTPUxcdsOOPy', 556096567, 1, '162527'),
+(2, 'Azzedine', 'Chalabi', 'agent7@admin.com', '$2y$10$mKMdR5tTaSyONbXPZCwAhOTTsMAX9Gsr2VlW1NLHXdxL5t39jOJ0i', 556096543, 0, '188208'),
+(3, 'Azzedine', 'Chalabi', 'agent67@admin.com', '$2y$10$u6rjUkoGX97VzSa1hx5eWO1ZgIrqkV.GIMjRyVe53fcYLnDGFEBXG', 556126567, 0, '538943');
 
 -- --------------------------------------------------------
 
@@ -71,7 +91,6 @@ CREATE TABLE `conducteur` (
 --
 
 INSERT INTO `conducteur` (`id_conducteur`, `nom`, `prenom`, `adresse_conducteur`, `mdp_conducteur`, `numero_tel`, `matricule_voiture`, `nb_places`, `voiture`, `is_verified`, `verification_token`) VALUES
-(1, 'Azzedine', 'Chalabi', 'agent@admin.com', '$2y$10$RQqKfpLzHOJ7sxW1/o2vtuYQ3NMjJ68RNpT0JNwlh3MkkjI8hRh4u', 556096567, '202031050514', NULL, 'Chalabi Azzedine', 1, '168573'),
 (2, 'Azzedine', 'Chalabi', 'bouguerrifatmazohra@gmail.com', '$2y$10$rOY876cw3p8PTI3o5BMqd.11z98shEpPBRWO7NdItnp83.VCJ49Gi', 556096512, 'A123', NULL, 'Chalabi Azzedine', 1, '716317');
 
 -- --------------------------------------------------------
@@ -103,21 +122,6 @@ CREATE TABLE `trajet` (
   `prix` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `trajet`
---
-
-INSERT INTO `trajet` (`id_trajet`, `id_conducteur`, `lieu_depart`, `destination`, `date_trajet`, `heure_depart`, `nb_places_dispo`, `prix`) VALUES
-(21, 1, 'AZERTYUIa', 'reghaiaa', '2023-12-06', '00:00:17', 3, '12346.00'),
-(23, 2, 'AZERTYUIK', 'reghaia', '0000-00-00', '00:00:12', 1, '12345.00'),
-(24, 1, 'City A', 'City B', '2023-01-15', '08:00:00', 3, '2222.00'),
-(25, 1, 'City A', 'City B', '2023-01-15', '08:00:00', 3, '2222.00'),
-(26, 1, 'City A', 'City B', '2023-01-15', '08:00:00', 3, '2222.00'),
-(27, 1, 'City A', 'City B', '2023-01-15', '08:00:00', 3, '2222.00'),
-(28, 2, 'City A', 'City B', '2023-01-15', '08:00:00', 3, '2222.00'),
-(29, 2, 'City A', 'City B', '2023-01-15', '08:00:00', 3, '2222.00'),
-(30, 2, 'City A', 'City B', '2023-01-15', '08:00:00', 3, '2222.00');
-
 -- --------------------------------------------------------
 
 --
@@ -145,6 +149,12 @@ INSERT INTO `trajet_propose` (`id_trajet_propose`, `depart`, `arrivee`) VALUES
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `client`
 --
 ALTER TABLE `client`
@@ -166,7 +176,7 @@ ALTER TABLE `conducteur`
 --
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`id_reservation`),
-  ADD KEY `id_client` (`id_client`),
+  ADD UNIQUE KEY `id_client` (`id_client`),
   ADD KEY `id_trajet` (`id_trajet`);
 
 --
@@ -174,7 +184,7 @@ ALTER TABLE `reservation`
 --
 ALTER TABLE `trajet`
   ADD PRIMARY KEY (`id_trajet`),
-  ADD KEY `fk_id_conducteur` (`id_conducteur`);
+  ADD UNIQUE KEY `id_conducteur` (`id_conducteur`);
 
 --
 -- Indexes for table `trajet_propose`
@@ -187,10 +197,16 @@ ALTER TABLE `trajet_propose`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `conducteur`
@@ -202,13 +218,13 @@ ALTER TABLE `conducteur`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id_reservation` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `trajet_propose`
@@ -224,6 +240,7 @@ ALTER TABLE `trajet_propose`
 -- Constraints for table `reservation`
 --
 ALTER TABLE `reservation`
+  ADD CONSTRAINT `fk_id_client` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`) ON DELETE CASCADE,
   ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`),
   ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`id_trajet`) REFERENCES `trajet` (`id_trajet`);
 
@@ -231,7 +248,7 @@ ALTER TABLE `reservation`
 -- Constraints for table `trajet`
 --
 ALTER TABLE `trajet`
-  ADD CONSTRAINT `fk_id_conducteur` FOREIGN KEY (`id_conducteur`) REFERENCES `conducteur` (`id_conducteur`);
+  ADD CONSTRAINT `fk_id_conducteur` FOREIGN KEY (`id_conducteur`) REFERENCES `conducteur` (`id_conducteur`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
