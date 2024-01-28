@@ -17,7 +17,7 @@ if (isset($_SESSION['userId'])) {
 				<div class="text">
 				  <h1 class="mb-4">Voyagez et  <span> Réservez avec Simplicité </span></h1>
 				  <p style="font-size: 18px;"> Avec notre service de réservation en ligne, </br> découvrez le confort d'un voyage sans souci,</br> où chaque détail est pris en charge pour</br> vous. </p>
-				  <a href="https://vimeo.com/45830194" class="icon-wrap popup-vimeo d-flex align-items-center mt-4">
+				  <a href="images/b6a175bd49215ca7b9bc441c5bad4883.mp4" class="icon-wrap popup-vimeo d-flex align-items-center mt-4">
 					  <div class="icon d-flex align-items-center justify-content-center">
 						<span class="ion-ios-play"></span>
 					  </div>
@@ -227,10 +227,7 @@ $result = mysqli_query($conn, $query);
 		
     <?php
         } // Close the while loop
-    } else {
-        // No trips found
-        echo '<p>No trips available.</p>';
-    }
+    } 
   
     ?>
 </div>
@@ -334,74 +331,64 @@ if ($total_records_result) {
 	            <h2 class="mb-4">Trouvez la voiture idéale</h2>
 
 	            <p>Chez RyzTrips, nous sommes fiers de révolutionner votre expérience du voyage. Notre engagement est de fournir une commodité inégalée et des services personnalisés qui répondent à vos préférences uniques. Axés sur l'innovation et la satisfaction client, nous nous efforçons de rendre chaque voyage mémorable. Des réservations sans faille à l'autonomisation des conducteurs et à l'offre de trajets personnalisés, nous sommes déterminés à remodeler le paysage des transports. Choisissez RyzTrips pour une expérience de voyage transformative qui vous met aux commandes de votre trajet.</p>
-	            <p><a href="#" class="btn btn-primary">Search Trip</a></p>
+	            <p><a href="#" class="btn btn-primary">Rechercher votre</a></p>
 	          </div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-    <section class="ftco-section">
-		
-	<div id="myMap" style="position:relative;height:400px;"></div>
-	
-	 <!-- Reference to the Bing Maps SDK -->
-	 <script type='text/javascript'
-            src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AoiyGy03-LqmZBoXyAArp6u-Rt9nobOLSDd5YoZ6lA1VD9IykV4v1F45td0Yw4Zs' 
-            async defer></script>
-    
+		<section class="ftco-section">
+    <div id="bingMap" style="position:relative;height:400px;"></div>
 
-	
-<script type='text/javascript'>
-function GetMap() {
-    var map = new Microsoft.Maps.Map('#myMap');
+    <!-- Reference to the Bing Maps SDK -->
+    <script type='text/javascript' src='https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&s=1'></script>
+    <script type='text/javascript'>
+        var map, mapOptions; 
+        var pinInfobox = null;
 
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function (position) {
-                var loc = new Microsoft.Maps.Location(position.coords.latitude, position.coords.longitude);
-                map.setView({ center: loc, zoom: 15 });
-                // You can also add a pushpin at the user's location if needed.
+        function init() {
+            mapOptions = {
+                credentials: 'AoiyGy03-LqmZBoXyAArp6u-Rt9nobOLSDd5YoZ6lA1VD9IykV4v1F45td0Yw4Zs',
+                center: new Microsoft.Maps.Location(58.995311, -103.535156),
+                zoom: 3,
+                mapTypeId: Microsoft.Maps.MapTypeId.road
+            };
+
+            map = new Microsoft.Maps.Map(document.getElementById("bingMap"), mapOptions);
+            Microsoft.Maps.Events.addHandler(map, 'click', getLatlng);
+
+            // Request the user's location
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var loc = new Microsoft.Maps.Location(
+                    position.coords.latitude,
+                    position.coords.longitude);
+
+                // Add a pushpin at the user's location.
                 var pin = new Microsoft.Maps.Pushpin(loc);
                 map.entities.push(pin);
-				
-            },
-            function (error) {
-                handleLocationError(error, map.getCenter());
+
+                // Center the map on the user's location.
+                map.setView({ center: loc, zoom: 15 });
+            });
+        }
+
+        function getLatlng(e) { 
+            if (e.targetType == "map") {
+                var point = new Microsoft.Maps.Point(e.getX(), e.getY());
+                var locTemp = e.target.tryPixelToLocation(point);
+                var location = new Microsoft.Maps.Location(locTemp.latitude, locTemp.longitude);
+
+                var pin = new Microsoft.Maps.Pushpin(location, {'draggable': false});
+
+                map.entities.push(pin);
             }
-        );
-    } else {
-        // Browser doesn't support Geolocation
-        handleLocationError({ code: 0, message: 'Geolocation is not supported.' }, map.getCenter());
-    }
-}
+        }
 
-function handleLocationError(error, center) {
-    switch (error.code) {
-        case error.PERMISSION_DENIED:
-            alert("User denied the request for Geolocation.");
-            break;
-        case error.POSITION_UNAVAILABLE:
-            alert("Location information is unavailable.");
-            break;
-        case error.TIMEOUT:
-            alert("The request to get user location timed out.");
-            break;
-        case error.UNKNOWN_ERROR:
-            alert("An unknown error occurred.");
-            break;
-        default:
-            alert("An error occurred: " + error.message);
-            break;
-    }
-
-    // Center the map on a default location.
-    var map = new Microsoft.Maps.Map('#myMap');
-    map.setView({ center: center, zoom: 12 });
-}
-</script>
-    </section>	
+        // Call the init function when the page is loaded
+        window.onload = init;
+    </script>
+</section>
 	<?php include "./includes/footer.php";?>
 
   

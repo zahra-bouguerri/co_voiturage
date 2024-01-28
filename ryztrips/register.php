@@ -220,7 +220,7 @@ $stmt->bind_param('ssssisss', $nom, $prenom, $matricule, $nom_voiture, $telephon
     <div class="forms">
         <div class="form-content">
           <div class="login-form">
-            <div class="title">Connexion Cliente</div>
+            <div class="title">Connexion Client</div>
             <form  method="post">
                 <div class="input-boxes">
                  <div class="flex">
@@ -254,7 +254,7 @@ $stmt->bind_param('ssssisss', $nom, $prenom, $matricule, $nom_voiture, $telephon
       </form>
       </div>
         <div class="signup-form">
-            <div class="title">Connexion Condecteur</div>
+            <div class="title">Connexion Conducteur</div>
             <form  method="post">
                     <div class="flex">
                         <div class="input-box">
