@@ -4,7 +4,7 @@
                 <li>
                     <a href="#">
                         <span class="icon">
-                            <ion-icon name="car"></ion-icon>
+                            <ion-icon name="car-outline"></ion-icon>
                         </span>
                         <span class="title">Co-Voiturage Ryz</span>
                     </a>
@@ -13,7 +13,7 @@
                 <li>
                     <a href="cClient.php">
                         <span class="icon">
-                            <ion-icon name="eye-outline"></ion-icon>
+                            <ion-icon name="person-outline"></ion-icon>
                         </span>
                         <span class="title">Consulter les Client</span>
                     </a>
@@ -31,7 +31,7 @@
                 <li>
                     <a href="cCond.php">
                         <span class="icon">
-                            <ion-icon name="eye-outline"></ion-icon>
+                            <ion-icon name="car-sport-outline"></ion-icon>
                         </span>
                         <span class="title">Consulter les Conducteur</span>
                     </a>
@@ -40,7 +40,7 @@
                 <li>
                     <a href="deleteCond.php">
                         <span class="icon">
-                        <ion-icon name="trash-outline"></ion-icon>
+                        <ion-icon name="remove-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Supprimer un Conducteur</span>
                     </a>
@@ -49,7 +49,7 @@
                 <li>
                     <a href="cTrajet.php">
                         <span class="icon">
-                        <ion-icon name="eye-outline"></ion-icon>
+                        <ion-icon name="map-outline"></ion-icon>
                         </span>
                         <span class="title">Consulter Trajet</span>
                     </a>
