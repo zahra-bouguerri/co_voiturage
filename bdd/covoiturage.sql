@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 27, 2024 at 09:09 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Hôte : localhost
+-- Généré le : lun. 29 jan. 2024 à 20:17
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `covoiturage`
+-- Base de données : `covoiturage`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Structure de la table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `admin`
+-- Déchargement des données de la table `admin`
 --
 
 INSERT INTO `admin` (`id`, `email`, `password`) VALUES
@@ -43,7 +43,7 @@ INSERT INTO `admin` (`id`, `email`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `client`
+-- Structure de la table `client`
 --
 
 CREATE TABLE `client` (
@@ -58,18 +58,19 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `client`
+-- Déchargement des données de la table `client`
 --
 
 INSERT INTO `client` (`id_client`, `nom`, `prenom`, `adresse_client`, `mdp_client`, `numero_tel`, `is_verified`, `verification_token`) VALUES
 (1, 'Azzedine', 'Chalabi', 'agent@admin.com', '$2y$10$UqvQIVCzW43ob9H4j1EChuH7/wSNh3oSdBA0bohTJbTPUxcdsOOPy', 556096567, 1, '162527'),
 (2, 'Azzedine', 'Chalabi', 'agent7@admin.com', '$2y$10$mKMdR5tTaSyONbXPZCwAhOTTsMAX9Gsr2VlW1NLHXdxL5t39jOJ0i', 556096543, 0, '188208'),
-(3, 'Azzedine', 'Chalabi', 'agent67@admin.com', '$2y$10$u6rjUkoGX97VzSa1hx5eWO1ZgIrqkV.GIMjRyVe53fcYLnDGFEBXG', 556126567, 0, '538943');
+(3, 'Azzedine', 'Chalabi', 'agent67@admin.com', '$2y$10$u6rjUkoGX97VzSa1hx5eWO1ZgIrqkV.GIMjRyVe53fcYLnDGFEBXG', 556126567, 0, '538943'),
+(4, 'akrour', 'rania', 'akrour.raniaa@gmail.com', '$2y$10$e9GCCzZBqXaIHBKkvz.sLuHB5I3Mt2XjEBzrsTkQ84aBrW7IzGLK.', 562032715, 0, '580903');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `conducteur`
+-- Structure de la table `conducteur`
 --
 
 CREATE TABLE `conducteur` (
@@ -87,7 +88,7 @@ CREATE TABLE `conducteur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `conducteur`
+-- Déchargement des données de la table `conducteur`
 --
 
 INSERT INTO `conducteur` (`id_conducteur`, `nom`, `prenom`, `adresse_conducteur`, `mdp_conducteur`, `numero_tel`, `matricule_voiture`, `nb_places`, `voiture`, `is_verified`, `verification_token`) VALUES
@@ -96,7 +97,25 @@ INSERT INTO `conducteur` (`id_conducteur`, `nom`, `prenom`, `adresse_conducteur`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservation`
+-- Structure de la table `paramètres`
+--
+
+CREATE TABLE `paramètres` (
+  `id_parametre` int(11) NOT NULL,
+  `nombre_max` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `paramètres`
+--
+
+INSERT INTO `paramètres` (`id_parametre`, `nombre_max`) VALUES
+(1, 70);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reservation`
 --
 
 CREATE TABLE `reservation` (
@@ -108,7 +127,7 @@ CREATE TABLE `reservation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trajet`
+-- Structure de la table `trajet`
 --
 
 CREATE TABLE `trajet` (
@@ -122,10 +141,18 @@ CREATE TABLE `trajet` (
   `prix` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `trajet`
+--
+
+INSERT INTO `trajet` (`id_trajet`, `id_conducteur`, `lieu_depart`, `destination`, `date_trajet`, `heure_depart`, `nb_places_dispo`, `prix`) VALUES
+(42, NULL, 'alger ', 'oran', '2023-12-08', '23:31:00', 2, '0.00'),
+(43, 2, 'City A', 'City B', '2023-01-15', '23:34:00', 2, '0.00');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trajet_propose`
+-- Structure de la table `trajet_propose`
 --
 
 CREATE TABLE `trajet_propose` (
@@ -135,7 +162,7 @@ CREATE TABLE `trajet_propose` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `trajet_propose`
+-- Déchargement des données de la table `trajet_propose`
 --
 
 INSERT INTO `trajet_propose` (`id_trajet_propose`, `depart`, `arrivee`) VALUES
@@ -145,17 +172,17 @@ INSERT INTO `trajet_propose` (`id_trajet_propose`, `depart`, `arrivee`) VALUES
 (4, 'aa', 'ss');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `admin`
+-- Index pour la table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `client`
+-- Index pour la table `client`
 --
 ALTER TABLE `client`
   ADD PRIMARY KEY (`id_client`),
@@ -163,7 +190,7 @@ ALTER TABLE `client`
   ADD UNIQUE KEY `unique_adresse_client_constraint` (`adresse_client`);
 
 --
--- Indexes for table `conducteur`
+-- Index pour la table `conducteur`
 --
 ALTER TABLE `conducteur`
   ADD PRIMARY KEY (`id_conducteur`),
@@ -172,7 +199,13 @@ ALTER TABLE `conducteur`
   ADD UNIQUE KEY `unique_matricule_voiture` (`matricule_voiture`);
 
 --
--- Indexes for table `reservation`
+-- Index pour la table `paramètres`
+--
+ALTER TABLE `paramètres`
+  ADD PRIMARY KEY (`id_parametre`);
+
+--
+-- Index pour la table `reservation`
 --
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`id_reservation`),
@@ -180,64 +213,64 @@ ALTER TABLE `reservation`
   ADD KEY `id_trajet` (`id_trajet`);
 
 --
--- Indexes for table `trajet`
+-- Index pour la table `trajet`
 --
 ALTER TABLE `trajet`
   ADD PRIMARY KEY (`id_trajet`),
   ADD UNIQUE KEY `id_conducteur` (`id_conducteur`);
 
 --
--- Indexes for table `trajet_propose`
+-- Index pour la table `trajet_propose`
 --
 ALTER TABLE `trajet_propose`
   ADD PRIMARY KEY (`id_trajet_propose`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT pour la table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `client`
+-- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `conducteur`
+-- AUTO_INCREMENT pour la table `conducteur`
 --
 ALTER TABLE `conducteur`
   MODIFY `id_conducteur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `reservation`
+-- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
   MODIFY `id_reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `trajet`
+-- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
--- AUTO_INCREMENT for table `trajet_propose`
+-- AUTO_INCREMENT pour la table `trajet_propose`
 --
 ALTER TABLE `trajet_propose`
   MODIFY `id_trajet_propose` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `reservation`
+-- Contraintes pour la table `reservation`
 --
 ALTER TABLE `reservation`
   ADD CONSTRAINT `fk_id_client` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`) ON DELETE CASCADE,
@@ -245,7 +278,7 @@ ALTER TABLE `reservation`
   ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`id_trajet`) REFERENCES `trajet` (`id_trajet`);
 
 --
--- Constraints for table `trajet`
+-- Contraintes pour la table `trajet`
 --
 ALTER TABLE `trajet`
   ADD CONSTRAINT `fk_id_conducteur` FOREIGN KEY (`id_conducteur`) REFERENCES `conducteur` (`id_conducteur`) ON DELETE CASCADE;
