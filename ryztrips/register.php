@@ -220,7 +220,7 @@ $stmt->bind_param('ssssisss', $nom, $prenom, $matricule, $nom_voiture, $telephon
     <div class="forms">
         <div class="form-content">
           <div class="login-form">
-            <div class="title">Connexion Client</div>
+            <div class="title"> Inscription Client</div>
             <form  method="post">
                 <div class="input-boxes">
                  <div class="flex">
@@ -248,13 +248,13 @@ $stmt->bind_param('ssssisss', $nom, $prenom, $matricule, $nom_voiture, $telephon
                     <div class="button input-box">
                         <input type="submit" name="client_submit" value="Envoyer">
                     </div>
-                    <div class="text sign-up-text"> <label for="flip">Connectez-vous en tantque condicteur</label></div>
+                    <div class="text sign-up-text"> <label for="flip"> Inscrez-vous en tantque condicteur</label></div>
                     <div class="text sign-up-text">Vous avez déjà un compte ? <label for="flip" onclick="redirigerVersConnexion()">Connectez-vous </label></div>
             </div>
       </form>
       </div>
         <div class="signup-form">
-            <div class="title">Connexion Conducteur</div>
+            <div class="title"> Inscription  Conducteur</div>
             <form  method="post">
                     <div class="flex">
                         <div class="input-box">
@@ -292,7 +292,7 @@ $stmt->bind_param('ssssisss', $nom, $prenom, $matricule, $nom_voiture, $telephon
                     <div class="button input-box">
                         <input type="submit" name="conducteur_submit" value="Envoyer">
                     </div>
-                    <div class="text sign-up-text"> <label for="flip">Connectez-vous en tantque client</label></div>
+                    <div class="text sign-up-text"> <label for="flip"> Inscrez-vous en tantque client</label></div>
                     <div class="text sign-up-text">Vous avez déjà un compte ? <label for="flip" onclick="redirigerVersConnexion()">Connectez-vous </label></div>
 
                 </div>

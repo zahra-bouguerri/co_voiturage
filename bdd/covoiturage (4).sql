@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : lun. 29 jan. 2024 à 20:17
+-- Hôte : 127.0.0.1
+-- Généré le : mar. 30 jan. 2024 à 16:40
 -- Version du serveur : 10.4.27-MariaDB
--- Version de PHP : 8.0.25
+-- Version de PHP : 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,7 +65,8 @@ INSERT INTO `client` (`id_client`, `nom`, `prenom`, `adresse_client`, `mdp_clien
 (1, 'Azzedine', 'Chalabi', 'agent@admin.com', '$2y$10$UqvQIVCzW43ob9H4j1EChuH7/wSNh3oSdBA0bohTJbTPUxcdsOOPy', 556096567, 1, '162527'),
 (2, 'Azzedine', 'Chalabi', 'agent7@admin.com', '$2y$10$mKMdR5tTaSyONbXPZCwAhOTTsMAX9Gsr2VlW1NLHXdxL5t39jOJ0i', 556096543, 0, '188208'),
 (3, 'Azzedine', 'Chalabi', 'agent67@admin.com', '$2y$10$u6rjUkoGX97VzSa1hx5eWO1ZgIrqkV.GIMjRyVe53fcYLnDGFEBXG', 556126567, 0, '538943'),
-(4, 'akrour', 'rania', 'akrour.raniaa@gmail.com', '$2y$10$e9GCCzZBqXaIHBKkvz.sLuHB5I3Mt2XjEBzrsTkQ84aBrW7IzGLK.', 562032715, 0, '580903');
+(4, 'akrour', 'rania', 'akrour.raniaa@gmail.com', '$2y$10$e9GCCzZBqXaIHBKkvz.sLuHB5I3Mt2XjEBzrsTkQ84aBrW7IzGLK.', 562032715, 0, '580903'),
+(5, 'ryz', 'devlopper', 'yousrarebai886@gmail.com', '$2y$10$XNPYRMHUacDy.xunQQCgOeW07e1w7WvJbYCfSxC.th0Vn3fQ..zFi', 554092451, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -92,7 +93,8 @@ CREATE TABLE `conducteur` (
 --
 
 INSERT INTO `conducteur` (`id_conducteur`, `nom`, `prenom`, `adresse_conducteur`, `mdp_conducteur`, `numero_tel`, `matricule_voiture`, `nb_places`, `voiture`, `is_verified`, `verification_token`) VALUES
-(2, 'Azzedine', 'Chalabi', 'bouguerrifatmazohra@gmail.com', '$2y$10$rOY876cw3p8PTI3o5BMqd.11z98shEpPBRWO7NdItnp83.VCJ49Gi', 556096512, 'A123', NULL, 'Chalabi Azzedine', 1, '716317');
+(2, 'Azzedine', 'Chalabi', 'bouguerrifatmazohra@gmail.com', '123', 556096512, 'A123', NULL, 'Chalabi Azzedine', 1, '716317'),
+(3, 'ryz', 'devlopper', 'yousrarebai886@gmail.com', '$2y$10$FQAUDJWHMbQwaOOpLVfwruWlKK8n0X0ddIPkzkyOOdgUpgcXVELoO', 554092451, '2000', NULL, 'devlopper ryz', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -110,7 +112,7 @@ CREATE TABLE `paramètres` (
 --
 
 INSERT INTO `paramètres` (`id_parametre`, `nombre_max`) VALUES
-(1, 70);
+(1, 17);
 
 -- --------------------------------------------------------
 
@@ -147,7 +149,9 @@ CREATE TABLE `trajet` (
 
 INSERT INTO `trajet` (`id_trajet`, `id_conducteur`, `lieu_depart`, `destination`, `date_trajet`, `heure_depart`, `nb_places_dispo`, `prix`) VALUES
 (42, NULL, 'alger ', 'oran', '2023-12-08', '23:31:00', 2, '0.00'),
-(43, 2, 'City A', 'City B', '2023-01-15', '23:34:00', 2, '0.00');
+(43, 2, 'City A', 'City B', '2023-01-15', '23:34:00', 2, '0.00'),
+(44, 3, 'ruiba', 'alger', '2024-01-29', '12:00:00', 19, '300000.00'),
+(47, 3, 'REGHAIA', 'bouz', '2024-01-10', '12:59:00', 19, '300.00');
 
 -- --------------------------------------------------------
 
@@ -208,16 +212,13 @@ ALTER TABLE `paramètres`
 -- Index pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD PRIMARY KEY (`id_reservation`),
-  ADD UNIQUE KEY `id_client` (`id_client`),
-  ADD KEY `id_trajet` (`id_trajet`);
+  ADD PRIMARY KEY (`id_reservation`);
 
 --
 -- Index pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  ADD PRIMARY KEY (`id_trajet`),
-  ADD UNIQUE KEY `id_conducteur` (`id_conducteur`);
+  ADD PRIMARY KEY (`id_trajet`);
 
 --
 -- Index pour la table `trajet_propose`
@@ -239,13 +240,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `conducteur`
 --
 ALTER TABLE `conducteur`
-  MODIFY `id_conducteur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_conducteur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `reservation`
@@ -257,7 +258,7 @@ ALTER TABLE `reservation`
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT pour la table `trajet_propose`
