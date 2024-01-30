@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 30 jan. 2024 à 16:40
+-- Généré le : mar. 30 jan. 2024 à 22:37
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -20,6 +20,53 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `covoiturage`
 --
+
+DELIMITER $$
+--
+-- Procédures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `supprimer_trajets_hourly_proc` ()   BEGIN
+    DECLARE currentDate DATE;
+    DECLARE currentTime TIME;
+    DECLARE trajetId INT;
+    DECLARE clientId INT;
+
+    SET currentDate = CURDATE();
+    SET currentTime = CURTIME();
+
+    -- 1. Commencer une transaction
+    START TRANSACTION;
+
+    -- 2. Désactiver temporairement la contrainte de clé étrangère
+    SET foreign_key_checks = 0;
+
+    -- 3. Supprimer les trajets et insérer les données dans historique_trajet
+    WHILE (SELECT COUNT(*) FROM trajet WHERE date_trajet < currentDate OR (date_trajet = currentDate AND heure_depart < ADDTIME(currentTime, '00:10:00'))) > 0 DO
+        -- Sélectionner et supprimer un trajet
+        SELECT id_trajet INTO trajetId FROM trajet WHERE date_trajet < currentDate OR (date_trajet = currentDate AND heure_depart < ADDTIME(currentTime, '00:10:00')) LIMIT 1;
+
+        -- Pour chaque client associé à la réservation, insérer les données dans historique_trajet
+        INSERT INTO historique_trajet (id_conducteur, id_client, lieu_depart, destination, date_trajet, heure_depart, nb_places_dispo, prix)
+        SELECT t.id_conducteur, r.id_client, t.lieu_depart, t.destination, t.date_trajet, t.heure_depart, t.nb_places_dispo, t.prix
+        FROM trajet t
+        JOIN reservation r ON t.id_trajet = r.id_trajet
+        WHERE t.id_trajet = trajetId;
+
+        -- Supprimer les réservations associées au trajet
+        DELETE FROM reservation WHERE id_trajet = trajetId;
+
+        -- Supprimer le trajet
+        DELETE FROM trajet WHERE id_trajet = trajetId;
+    END WHILE;
+
+    -- 4. Réactiver la contrainte de clé étrangère
+    SET foreign_key_checks = 1;
+
+    -- 5. Valider la transaction
+    COMMIT;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -99,6 +146,38 @@ INSERT INTO `conducteur` (`id_conducteur`, `nom`, `prenom`, `adresse_conducteur`
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `historique_trajet`
+--
+
+CREATE TABLE `historique_trajet` (
+  `id_historique_trajet` int(11) NOT NULL,
+  `id_conducteur` int(11) DEFAULT NULL,
+  `id_client` int(11) DEFAULT NULL,
+  `lieu_depart` varchar(255) DEFAULT NULL,
+  `destination` varchar(255) DEFAULT NULL,
+  `date_trajet` date DEFAULT NULL,
+  `heure_depart` time DEFAULT NULL,
+  `nb_places_dispo` int(11) DEFAULT NULL,
+  `prix` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `historique_trajet`
+--
+
+INSERT INTO `historique_trajet` (`id_historique_trajet`, `id_conducteur`, `id_client`, `lieu_depart`, `destination`, `date_trajet`, `heure_depart`, `nb_places_dispo`, `prix`) VALUES
+(1, 2, 2, 'Ville A', 'Ville B', '2024-01-01', '08:00:00', 3, '50.00'),
+(2, 2, 3, 'Ville A', 'Ville B', '2024-01-01', '08:00:00', 3, '50.00'),
+(3, 2, 1, 'Ville A', 'Ville B', '2024-01-01', '08:00:00', 3, '50.00'),
+(4, 2, 2, 'Ville C', 'Ville D', '2024-01-02', '09:30:00', 2, '40.00'),
+(5, 2, 2, 'Ville A', 'Ville B', '2024-01-01', '08:00:00', 3, '50.00'),
+(6, 2, 3, 'Ville A', 'Ville B', '2024-01-01', '08:00:00', 3, '50.00'),
+(8, 2, 2, 'Ville C', 'Ville D', '2024-01-30', '21:00:00', 2, '40.00'),
+(9, 3, 3, 'Ville E', 'Ville F', '2024-01-30', '22:10:00', 4, '60.00');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `paramètres`
 --
 
@@ -142,16 +221,6 @@ CREATE TABLE `trajet` (
   `nb_places_dispo` int(11) DEFAULT NULL,
   `prix` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `trajet`
---
-
-INSERT INTO `trajet` (`id_trajet`, `id_conducteur`, `lieu_depart`, `destination`, `date_trajet`, `heure_depart`, `nb_places_dispo`, `prix`) VALUES
-(42, NULL, 'alger ', 'oran', '2023-12-08', '23:31:00', 2, '0.00'),
-(43, 2, 'City A', 'City B', '2023-01-15', '23:34:00', 2, '0.00'),
-(44, 3, 'ruiba', 'alger', '2024-01-29', '12:00:00', 19, '300000.00'),
-(47, 3, 'REGHAIA', 'bouz', '2024-01-10', '12:59:00', 19, '300.00');
 
 -- --------------------------------------------------------
 
@@ -203,6 +272,12 @@ ALTER TABLE `conducteur`
   ADD UNIQUE KEY `unique_matricule_voiture` (`matricule_voiture`);
 
 --
+-- Index pour la table `historique_trajet`
+--
+ALTER TABLE `historique_trajet`
+  ADD PRIMARY KEY (`id_historique_trajet`);
+
+--
 -- Index pour la table `paramètres`
 --
 ALTER TABLE `paramètres`
@@ -249,16 +324,22 @@ ALTER TABLE `conducteur`
   MODIFY `id_conducteur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT pour la table `historique_trajet`
+--
+ALTER TABLE `historique_trajet`
+  MODIFY `id_historique_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id_reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_reservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT pour la table `trajet`
 --
 ALTER TABLE `trajet`
-  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_trajet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT pour la table `trajet_propose`
@@ -283,6 +364,16 @@ ALTER TABLE `reservation`
 --
 ALTER TABLE `trajet`
   ADD CONSTRAINT `fk_id_conducteur` FOREIGN KEY (`id_conducteur`) REFERENCES `conducteur` (`id_conducteur`) ON DELETE CASCADE;
+
+DELIMITER $$
+--
+-- Évènements
+--
+CREATE DEFINER=`root`@`localhost` EVENT `supprimer_trajets_hourly` ON SCHEDULE EVERY 1 HOUR STARTS '2024-01-30 21:00:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    CALL supprimer_trajets_hourly_proc;
+END$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
