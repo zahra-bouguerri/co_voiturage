@@ -115,7 +115,7 @@ if (isset($_POST['submit'])) {
               <div class="button input-box">
                 <input type="submit" name="submit" value="Submit">
               </div>
-              <div class="text sign-up-text">Vous n'avez pas de compte ? <a href="register.php"> Connectez-vous</a></div>
+              <div class="text sign-up-text">Vous n'avez pas de compte ? <a href="register.php"> Inscrez-vous </a></div>
             </div>
           </form>
       </div>
