@@ -44,7 +44,7 @@ if (isset($_POST['ajouter'])) {
             // Fermer la déclaration préparée
             $stmt->close();
         } else {
-            echo "<script>alert('Erreur: Le nombre de places ne doit pas dépasser $nbMaxPlaces !'); window.location.href='conducteur.php?userId=" . $_SESSION['userId'] . "';</script>";
+            echo "<script>alert('Erreur: Le nombre de places ne doit pas dépasser $nbMaxPlaces   !! '); window.location.href='conducteur.php?userId=" . $_SESSION['userId'] . "';</script>";
         }
     } else {
         echo "<script>alert('Erreur lors de la récupération du nombre maximum de places !'); window.location.href='conducteur.php?userId=" . $_SESSION['userId'] . "';</script>";
