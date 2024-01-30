@@ -54,6 +54,14 @@
                         <span class="title">Consulter Trajet</span>
                     </a>
                 </li>
+                <li>
+                    <a href=" hst.php">
+                        <span class="icon">
+                        <ion-icon name="time-outline"></ion-icon>
+                        </span>
+                        <span class="title"> historique des trajets</span>
+                    </a>
+                </li>
 
                
                 <li>
