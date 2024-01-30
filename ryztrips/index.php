@@ -339,7 +339,8 @@ if ($total_records_result) {
 		</section>
 
 		<section class="ftco-section">
-		<div id="bingMap" style="position:relative;height:400px;"></div>
+
+        <div id="bingMap" style="position:relative;height:400px;"></div>
 <script type='text/javascript' src='https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&s=1'></script>
 <script type='text/javascript'>
         var map, mapOptions; 
@@ -381,7 +382,12 @@ if (!$result) {
 // Parcourir les résultats et afficher les trajets sur la carte
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "addTrajetToMap('" . $row['lieu_depart'] . "', '" . $row['destination'] . "');\n";
+        $lieuDepart = htmlspecialchars($row['lieu_depart']);
+        $destination = htmlspecialchars($row['destination']);
+        $dateDepart = htmlspecialchars($row['date_trajet']);
+        $heureDepart = htmlspecialchars($row['heure_depart']);
+
+        echo "addTrajetToMap('" . $lieuDepart . "', '" . $destination . "', '" . $dateDepart . "', '" . $heureDepart . "' );\n";
     }
 } else {
     echo "Aucun trajet trouvé dans la base de données.";
@@ -390,9 +396,11 @@ if ($result->num_rows > 0) {
 // Fermer la connexion à la base de données
 $conn->close();
 ?>
+
+
         }
         
-        function addTrajetToMap(lieuDepart, destination) {
+        function addTrajetToMap(lieuDepart, destination, dateDepart, heureDepart) {
     // Fonction pour géocoder une adresse et renvoyer les coordonnées
     function geocodeAddress(address) {
         return new Promise(function (resolve, reject) {
@@ -432,7 +440,7 @@ $conn->close();
             // Ajouter une infobox avec le nom du lieu de départ
             pushpinDepart.metadata = {
                 title: 'Départ',
-                description: lieuDepart
+                description: lieuDepart + '<br>Date de départ<br> : ' + dateDepart + '<br>Heure de départ<br>: ' + heureDepart
             };
 
             Microsoft.Maps.Events.addHandler(pushpinDepart, 'click', displayInfobox);
@@ -471,6 +479,7 @@ $conn->close();
         });
 }
 
+
 // Fonction pour afficher l'infobox au clic sur le pushpin
 function displayInfobox(e) {
     if (e.target.metadata) {
@@ -499,7 +508,6 @@ function displayInfobox(e) {
         // Call the init function when the page is loaded
         window.onload = init;
     </script>
-
 
 </section>
 	<?php include "./includes/footer.php";?>
