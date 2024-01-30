@@ -10,14 +10,10 @@ if (isset($_POST['ajouter'])) {
     $prix = $_POST['prix'];
     $dateFormulaire = $_POST['date'];
     $heureFormulaire = $_POST['heure'];
-<<<<<<< HEAD
     
     if (isset($_SESSION['userId'])) {
         $id_conducteur = $_SESSION['userId'];
     }
-=======
-
->>>>>>> 4f10da759556d5f74e995c5d18ce51c4877b5b5e
     // Récupérer le nombre maximum de places depuis la table des paramètres (ajustez le nom de la table si nécessaire)
     $queryMaxPlaces = "SELECT  nombre_max FROM paramètres  ";
     $resultMaxPlaces = $conn->query($queryMaxPlaces);
@@ -63,8 +59,4 @@ if (isset($_POST['ajouter'])) {
     // Fermer la connexion à la base de données
     $conn->close();
 }
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> 4f10da759556d5f74e995c5d18ce51c4877b5b5e
