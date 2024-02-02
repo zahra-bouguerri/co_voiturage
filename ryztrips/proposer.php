@@ -87,9 +87,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <input type="submit" value="Envoyer" class="form-control btn btn-primary">
                         </div>
                     </form>
-                </section>
-            </div>
+    </div>
         </div>
+    </div>
+    </div>
+        <div class="container-fluid">
+
         <div class="form-container">
     <!-- Contenu du deuxième formulaire -->
     <div class="car-list">
@@ -122,12 +125,12 @@ if(isset($_GET['delete'])) {
         <table class="table">
             <thead class="thead-primary">
                 <tr class="text-center">
-
-                    <th class="bg-dark heading">Numero de conducteur</th>
-                    <th class="bg-dark heading">Depart</th>
-                    <th class="bg-dark heading">Arrivee</th>
-                    <th class="bg-dark heading">Date</th>
+         
+                    <th class="bg-primary heading">Depart</th>
+                    <th class="bg-primary heading">Arrivee</th>
+                    <th class="bg-dark heading">Date</th>        
                     <th class="bg-dark heading">Heure</th>
+                    <th class="bg-dark heading">Numero de conducteur</th>
                     <th class="bg-dark heading">Action</th>
                 </tr>
             </thead>
@@ -136,11 +139,12 @@ if(isset($_GET['delete'])) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
  
-                    echo "<td>" . $row['numero_tel'] . "</td>";
+                  
                     echo "<td>" . $row['lieu_depart'] . "</td>";
                     echo "<td>" . $row['destination'] . "</td>";
                     echo "<td>" . $row['date_trajet'] . "</td>";
-                    echo "<td>" . $row['heure_depart'] . "</td>";?>
+                    echo "<td>" . $row['heure_depart'] . "</td>";
+                      echo "<td>0" . $row['numero_tel'] . "</td>";?>
                  <td>
     <a href="?delete=<?php echo $row['id_reservation']; ?>" onclick="return confirm('Vous êtes sûr d\'annuler cette réservation?')">
         <ion-icon name="trash-outline">Delete</ion-icon>
@@ -155,6 +159,9 @@ if(isset($_GET['delete'])) {
     </div>
 </div>
     </div>
+    </div>
+    </section>
+         
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
