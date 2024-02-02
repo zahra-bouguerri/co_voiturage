@@ -32,4 +32,3 @@ Please note that there might be a delay in displaying the map. Kindly be patient
 
 This delay is normal and depends on various factors such as network speed and server responsiveness. If the map takes longer than expected to load, please wait for a moment and try again.
 
-If you encounter any persistent issues with the map display, feel free to reach out for assistance.
