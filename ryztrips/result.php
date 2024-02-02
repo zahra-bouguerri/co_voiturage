@@ -2,6 +2,7 @@
 include('../config/connect.php');
 
 // Vérifie si le formulaire a été soumis
+$role = $_SESSION['role'];
 if (isset($_POST['btnr'])) {
     // Récupère les informations soumises par le formulaire
     $depart = $_POST['depart'];
@@ -70,12 +71,17 @@ if (isset($_POST['btnr'])) {
             echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['date_trajet'] . "</span></div></td>";
             echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><span class='subheading'>" . $row['heure_depart'] . "</span></div></td>";
             echo "<td class='price'><p class='btn-custom'><a href='#'>Rent a car</a></p><div class='price-rate'><h3><span class='num'><small class='currency'></small>" . $row['prix'] . " DA</span></h3></div></td>";
-            echo "<td class='price'><button type='button' class='btn btn-primary' title='réserver' onclick=\"window.location.href='reserver.php?trajetId=" . $row['id_trajet'] . "&userId=" . $userId . "'\">
-            <i class='fas fa-car'></i>
-        </button></td>";
-        echo "</tr>";
-                         }
-                            ?>
+            echo "<td>";
+            if ($role == 'conducteur') {
+                echo "<p>En tant que conducteur, vous ne pouvez pas réserver de trajet.</p>";
+            } else {
+                $reservationLink = "reserver.php?userId=" . $userId . "&trajetId=" . $row['id_trajet'];
+                echo "<button type='button' class='btn btn-primary' title='Réserver' onclick=\"window.location.href='" . $reservationLink . "'\"><i class='fas fa-car'></i></button>";
+            }
+            echo "</td>";
+            echo "</tr>";
+        }
+        ?>
                                 </tbody>
                             </table>
                         </div>

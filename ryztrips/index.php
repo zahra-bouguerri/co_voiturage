@@ -7,6 +7,7 @@ if (isset($_SESSION['userId'])) {
     $userId = $_GET['userId'];
 
 }
+$role = $_SESSION['role'];
 ?>
 
     <div class="hero-wrap" style="background-image: url('images/bg_1.png');" data-stellar-background-ratio="0.5">
@@ -206,18 +207,23 @@ $result = mysqli_query($conn, $query);
                     <h6><span>place disponible : <?php echo $row['nb_places_dispo']?></h6>
 					<br>
 					<p class="text-center">
-						<?php
-	
-						if(isset($_SESSION['userId'])) {
-							$reservationLink = "reserver.php?userId=" . $_SESSION['userId'] . "&trajetId=" . $row['id_trajet'];
-							?>
-							<a href="<?php echo $reservationLink; ?>" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a>
-							<?php
-						} else {
-							echo "<script>alert('Veuillez vous connecter avant de réserver.')</script>";
-
-						}
-						?>
+                    <?php
+// Check if the user is logged in and is a conducteur
+if(isset($_SESSION['role']) && $_SESSION['role'] == 'conducteur') {
+    echo "<p class='btn btn-primary'>En tant que conducteur, vous ne pouvez pas réserver de trajet.</p>";
+} else {
+    // Allow other users to make reservations
+    if(isset($_SESSION['userId'])) {
+        $reservationLink = "reserver.php?userId=" . $_SESSION['userId'] . "&trajetId=" . $row['id_trajet'];
+?>
+        <a href="<?php echo $reservationLink; ?>" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a>
+<?php
+    } else {
+        echo "<script>alert('Veuillez vous connecter avant de réserver.')</script>";
+    }
+}
+?>
+					
                        </p>
 
                 </div>

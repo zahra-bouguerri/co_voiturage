@@ -34,7 +34,7 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Avez-vous des questions ?</h2>
+            	<h2 class="ftco-heading-2">Avez-vous des questions </h2>
             	<div class="block-23 mb-3">
 	              <ul>
 	             
