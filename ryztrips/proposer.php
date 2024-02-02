@@ -1,4 +1,15 @@
 <?php include "./includes/header.php"; 
+    
+
+    if (isset($_SESSION['userId'])) {
+        $userId = $_SESSION['userId'];
+    } elseif (isset($_GET['userId'])) {
+        $userId = $_GET['userId'];
+    } else {
+        echo "<script>alert('Veuillez vous connecter pour accéder au quiz.')</script>";
+        exit;
+    }
+  
 // Traitement du formulaire
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $lieu_depart = $_POST["lieu_depart"];
@@ -79,6 +90,70 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </section>
             </div>
         </div>
+        <div class="form-container">
+    <!-- Contenu du deuxième formulaire -->
+    <div class="car-list">
+        <h2>Mes reservations </h2>
+        <?php
+            // Fetch reservations for the current client
+// Fetch reservations for the current client
+// Fetch reservations for the current client
+$query = "SELECT c.numero_tel, t.lieu_depart, t.destination, t.date_trajet, t.heure_depart ,r.id_reservation
+          FROM trajet t
+          JOIN reservation r ON t.id_trajet = r.id_trajet
+          JOIN conducteur c ON t.id_conducteur = c.id_conducteur
+          WHERE r.id_client = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+?>
+<?php
+if(isset($_GET['delete'])) {
+    $code = $_GET['delete'];
+    // Use prepared statement with a placeholder for the id value
+    $deleteSql = "DELETE FROM reservation WHERE id_reservation = ? ";
+    $stmt = $conn->prepare($deleteSql);
+    $stmt->bind_param("i", $code); // Bind the integer value to the placeholder
+    $deleteResult = $stmt->execute(); // Execute the prepared statement
+
+}
+?>
+        <table class="table">
+            <thead class="thead-primary">
+                <tr class="text-center">
+
+                    <th class="bg-dark heading">Numero de conducteur</th>
+                    <th class="bg-dark heading">Depart</th>
+                    <th class="bg-dark heading">Arrivee</th>
+                    <th class="bg-dark heading">Date</th>
+                    <th class="bg-dark heading">Heure</th>
+                    <th class="bg-dark heading">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+ 
+                    echo "<td>" . $row['numero_tel'] . "</td>";
+                    echo "<td>" . $row['lieu_depart'] . "</td>";
+                    echo "<td>" . $row['destination'] . "</td>";
+                    echo "<td>" . $row['date_trajet'] . "</td>";
+                    echo "<td>" . $row['heure_depart'] . "</td>";?>
+                 <td>
+    <a href="?delete=<?php echo $row['id_reservation']; ?>" onclick="return confirm('Vous êtes sûr d\'annuler cette réservation?')">
+        <ion-icon name="trash-outline">Delete</ion-icon>
+    </a>
+</td>
+
+                   <?php echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
     </div>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

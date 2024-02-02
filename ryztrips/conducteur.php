@@ -237,6 +237,56 @@ function confirmerSuppression(id_trajet) {
             </div>
         </div>
     </div>
+    <div >
+    <div class="form-container">
+    <!-- Contenu du deuxième formulaire -->
+    <div class="car-list">
+        <h2>Les reservations des clients</h2>
+        <?php
+            // Fetch reservations for the current client
+    $query = "SELECT c.nom, c.prenom, c.numero_tel, t.lieu_depart, t.destination, t.date_trajet, t.heure_depart 
+              FROM reservation r
+              JOIN client c ON r.id_client = c.id_client
+              JOIN trajet t ON r.id_trajet = t.id_trajet
+              WHERE t.id_conducteur = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+        ?>
+        <table class="table">
+            <thead class="thead-primary">
+                <tr class="text-center">
+                    <th class="bg-primary heading">Nom</th>
+                    <th class="bg-dark heading">Prenom</th>
+                    <th class="bg-dark heading">Numero</th>
+                    <th class="bg-dark heading">Depart</th>
+                    <th class="bg-dark heading">Arrivee</th>
+                    <th class="bg-dark heading">Date</th>
+                    <th class="bg-dark heading">Heure</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row['nom'] . "</td>";
+                    echo "<td>" . $row['prenom'] . "</td>";
+                    echo "<td>" . $row['numero_tel'] . "</td>";
+                    echo "<td>" . $row['lieu_depart'] . "</td>";
+                    echo "<td>" . $row['destination'] . "</td>";
+                    echo "<td>" . $row['date_trajet'] . "</td>";
+                    echo "<td>" . $row['heure_depart'] . "</td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+        </div>
+    </div>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
