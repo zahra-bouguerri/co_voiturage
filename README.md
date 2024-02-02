@@ -25,3 +25,10 @@ Depending on the project, you may need to set up additional dependencies or conf
 With the application running locally and the database connected, you can now explore its functionality.
 Test different features and scenarios to understand how the project works.
 If you encounter any issues or have questions, refer to the project documentation or reach out to the project maintainers for assistance.
+
+## Map Display:
+
+Please note that there might be a delay in displaying the map. Kindly be patient while the map loads.
+
+This delay is normal and depends on various factors such as network speed and server responsiveness. If the map takes longer than expected to load, please wait for a moment and try again.
+
