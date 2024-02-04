@@ -7,6 +7,7 @@
         $userId = $_GET['userId'];
     } else {
         echo "<script>alert('Veuillez vous connecter pour accéder au quiz.')</script>";
+      
         exit;
     }
   
@@ -147,7 +148,7 @@ if(isset($_GET['delete'])) {
                       echo "<td>0" . $row['numero_tel'] . "</td>";?>
                  <td>
     <a href="?delete=<?php echo $row['id_reservation']; ?>" onclick="return confirm('Vous êtes sûr d\'annuler cette réservation?')">
-        <ion-icon name="trash-outline">Delete</ion-icon>
+        <ion-icon name="trash-outline">Annuler</ion-icon>
     </a>
 </td>
 

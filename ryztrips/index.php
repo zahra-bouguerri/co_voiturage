@@ -1,13 +1,24 @@
 <?php include "./includes/header.php"?>
 <?php
 
+// Initialize $userId and $role variables
+$userId = null;
+$role = null;
+
+// Check if $_SESSION['userId'] is set
 if (isset($_SESSION['userId'])) {
     $userId = $_SESSION['userId'];
 } elseif (isset($_GET['userId'])) {
     $userId = $_GET['userId'];
-
 }
-$role = $_SESSION['role'];
+
+// Check if $_SESSION['role'] is set
+if (isset($_SESSION['role'])) {
+    $role = $_SESSION['role'];
+}
+
+
+
 ?>
 
     <div class="hero-wrap" style="background-image: url('images/bg_1.png');" data-stellar-background-ratio="0.5">
@@ -208,6 +219,7 @@ $result = mysqli_query($conn, $query);
 					<br>
 					<p class="text-center">
                     <?php
+                 
 // Check if the user is logged in and is a conducteur
 if(isset($_SESSION['role']) && $_SESSION['role'] == 'conducteur') {
     echo "<p class='btn btn-primary'>En tant que conducteur, vous ne pouvez pas réserver de trajet.</p>";
@@ -218,8 +230,6 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == 'conducteur') {
 ?>
         <a href="<?php echo $reservationLink; ?>" class="btn btn-black btn-outline-black mr-1">Réserver maintenant</a>
 <?php
-    } else {
-        echo "<script>alert('Veuillez vous connecter avant de réserver.')</script>";
     }
 }
 ?>
@@ -259,13 +269,17 @@ if ($total_records_result) {
         <div class="block-27">
             <ul>
                 <?php
-                for ($i = 1; $i <= $total_pages; $i++) {
-                    if ($i == $current_page) {
-                        echo "<li class='active'><span>$i</span></li>";
-                    } else {
-						echo "<li><a href='?page=$i&userId=" . $_SESSION['userId'] . "'>$i</a></li>";
-                    }
-                }
+              
+              for ($i = 1; $i <= $total_pages; $i++) {
+                  if ($i == $current_page) {
+                      echo "<li class='active'><span>$i</span></li>";
+                  } else {
+                      // Check if $_SESSION['userId'] is set before accessing it
+                      $userIdParam = isset($_SESSION['userId']) ? "&userId=" . $_SESSION['userId'] : "";
+                      echo "<li><a href='?page=$i$userIdParam'>$i</a></li>";
+                  }
+              }
+              
                 ?>
             </ul>
         </div>

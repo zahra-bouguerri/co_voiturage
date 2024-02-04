@@ -9844,3 +9844,25 @@ textarea.form-control {
     cursor: pointer; /* Add a pointer cursor on hover */
     font-size: 12px; /* Font size */
 }
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+/* Customize the scrollbar track */
+::-webkit-scrollbar-track {
+ background-color:#e0a800; 
+}
+
+/* Customize the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #e0a800; 
+}
+
+/* Customize the scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background:#f7b71d
+  ; 
+}
+body {
+  overflow-x: hidden;
+}
